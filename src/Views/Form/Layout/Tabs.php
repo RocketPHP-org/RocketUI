@@ -6,15 +6,12 @@ use RocketPhp\RocketUI\Views\Form\Layout\Abstract\AbstractLayout;
 
 class Tabs extends AbstractLayout
 {
-    private string $id;
-    private string $label;
     private ?string $defaultTab;
     private array $containers = [];
 
     public function __construct(\DOMElement $tabsNode)
     {
-        $this->id = $tabsNode->getAttribute("id") ?? '';
-        $this->label = $tabsNode->getAttribute("label") ?? '';
+        parent::__construct($tabsNode);
         $this->defaultTab = $tabsNode->getAttribute("defaultTab") ?? null;
 
         foreach ($tabsNode->childNodes as $child) {
@@ -28,16 +25,6 @@ class Tabs extends AbstractLayout
         }
     }
 
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    public function getLabel(): string
-    {
-        return $this->label;
-    }
-
     public function getDefaultTab(): ?string
     {
         return $this->defaultTab;
@@ -47,13 +34,19 @@ class Tabs extends AbstractLayout
     {
         return $this->containers;
     }
-
-    public function getJson(mixed $data) : array
+    public function omitJson(mixed $data): array
     {
-        $jsonResponse = [];
+        $jsonResponse = [
+            'type' => (new \ReflectionClass($this))->getShortName(),
+            'elements' => [],
+        ];
+
+        if ($this->getDefaultTab()) {
+            $jsonResponse['defaultTab'] = $this->getDefaultTab();
+        }
 
         foreach ($this->containers as $container) {
-            $jsonResponse[] = $container->getJson($data);
+            $jsonResponse['elements'][] = $container->omitJson($data);
         }
 
         return $jsonResponse;

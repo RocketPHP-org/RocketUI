@@ -9,7 +9,7 @@
     </metadata>
 
     <layout>
-        <container id="main-container" label="Personal Information">
+        <container id="main-container" label="Personal Information" direction="row">
             <input id="name" type="text" label="Name" required="true" placeholder="Enter your name"/>
             <input id="email" type="email" label="Email" required="true" placeholder="Enter your email"/>
             <input id="birthdate" type="date" label="Birth Date" format="yyyy-mm-dd"/>

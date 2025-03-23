@@ -4,12 +4,15 @@ namespace RocketPhp\RocketUI\Views\Form\Field\Abstract;
 
 use RocketPhp\RocketRule\Condition\ConditionBuilder;
 use RocketPhp\RocketUI\Views\Form\AbstractCommonAttributes;
+use RocketPhp\RocketUI\Views\Service\ConditionEvaluation;
+use RocketPhp\RocketUI\Views\Service\ValueParser;
 
 abstract class AbstractField extends AbstractCommonAttributes
 {
     public function getJson(mixed $data): ?array
     {
-        if (($this->evaluateCondition($data, $this->isHidden()) && $this->isHidden()) ||
+        if (
+            ($this->evaluateCondition($data, $this->isHidden()) && $this->isHidden()) ||
             (!$this->evaluateCondition($data, $this->isVisible()) && $this->isVisible())
         ) {
             return null;
@@ -17,8 +20,9 @@ abstract class AbstractField extends AbstractCommonAttributes
 
         if ($data && is_object($data)) {
             $fieldName = $this->getName();
-            if (isset($data->$fieldName)) {
-                $this->value = $data->$fieldName;
+            if (is_string($fieldName) && $fieldName !== '') {
+                $value = $this->getNestedValue($data, $fieldName);
+                $this->value = is_scalar($value) ? (string)$value : null;
             }
         }
 
@@ -48,7 +52,7 @@ abstract class AbstractField extends AbstractCommonAttributes
             'onChange' => $this->getOnChange(),
             'condition' => $this->getCondition(),
             'csCondition' => $this->getCsCondition(),
-            'type' => (new \ReflectionClass($this))->getShortName(),
+            'component' => (new \ReflectionClass($this))->getShortName(),
         ];
 
         if (method_exists($this, 'omitJson')) {
@@ -61,38 +65,13 @@ abstract class AbstractField extends AbstractCommonAttributes
         return array_filter($parentJson, fn($value) => ($value !== null) && ($value !== ''));
     }
 
-    public function evaluateCondition(mixed $data, ?string $dsl): bool
+    private function getNestedValue(object $data, ?string $path): mixed
     {
-        if (!empty($dsl)) {
-
-            if ($dsl === 'true') {
-                return true;
-            }
-            if ($dsl === 'false') {
-                return false;
-            }
-            if ($dsl === 'is_new()') {
-                return empty($data);
-            }
-            if ($dsl === '!is_new()') {
-                return !empty($data);
-            }
-
-            if (is_object($data) && preg_match('/^(\!?)([a-zA-Z_][a-zA-Z0-9_]*)\(\)$/', $dsl, $matches)) {
-                $negate = $matches[1] === '!';
-                $method = $matches[2];
-
-                if (method_exists($data, $method)) {
-                    $result = $data->$method();
-                    return $negate ? !$result : $result;
-                }
-            }
-
-            $condition = ConditionBuilder::build($dsl);
-            return $condition->isSatisfiedBy($data);
-        }
-
-        return false;
+        return ValueParser::NestedValue($data, $path);
     }
 
+    public function evaluateCondition(mixed $data, ?string $dsl): bool
+    {
+        return ConditionEvaluation::evaluateCondition($data, $dsl);
+    }
 }

@@ -5,9 +5,8 @@
            elementFormDefault="qualified">
 
     <xs:complexType name="ButtonType">
-        <xs:attribute name="id" type="xs:string" use="required"/>
         <xs:attribute name="type" type="xs:string" use="required"/>
-        <xs:attribute name="label" type="xs:string" use="required"/>
+        <xs:attributeGroup ref="CommonAttributes"/>
     </xs:complexType>
 
     <xs:element name="button" type="ButtonType"/>

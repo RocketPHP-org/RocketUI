@@ -12,6 +12,7 @@ class Layout extends AbstractLayout
 
     public function __construct(\DOMElement $layoutNode)
     {
+        parent::__construct($layoutNode);
         $this->type = $layoutNode->getAttribute("type") ?? 'default';
 
         foreach ($layoutNode->childNodes as $child) {
@@ -47,8 +48,8 @@ class Layout extends AbstractLayout
     {
         $jsonResponse = [];
 
-        foreach ($this->elements as $container) {
-            $jsonResponse[] = $container->getJson($data);
+        foreach ($this->elements as $element) {
+            $jsonResponse[] = $element->getJson($data);
         }
 
         return $jsonResponse;

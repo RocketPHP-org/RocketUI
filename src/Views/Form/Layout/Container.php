@@ -9,19 +9,33 @@ use RocketPhp\RocketUI\Views\Form\Field\Paragraph;
 use RocketPhp\RocketUI\Views\Form\Field\Select;
 use RocketPhp\RocketUI\Views\Form\Field\Textarea;
 use RocketPhp\RocketUI\Views\Form\Field\UseCase;
+use RocketPhp\RocketUI\Views\Form\Field\Status;
+use RocketPhp\RocketUI\Views\Form\Field\Thumb;
+use RocketPhp\RocketUI\Views\Form\Layout\Tabs;
 use RocketPhp\RocketUI\Views\Form\Layout\Abstract\AbstractLayout;
 
 class Container extends AbstractLayout
 {
-    private string $id;
-    private string $label;
     private ?string $type;
+    private ?int $index;
+    private ?string $validIcon;
+    private ?string $invalidIcon;
+    private ?string $inProgressIcon;
+    private ?string $direction;
+
     private array $fields = [];
+
     public function __construct(\DOMElement $containerNode)
     {
+        parent::__construct($containerNode);
         $this->id = $containerNode->getAttribute("id") ?? '';
         $this->label = $containerNode->getAttribute("label") ?? '';
-        $this->type = $containerNode->getAttribute("type") ?? null;
+        $this->type = $containerNode->getAttribute("type") ?: null;
+        $this->index = $containerNode->hasAttribute("index") ? (int) $containerNode->getAttribute("index") : null;
+        $this->validIcon = $containerNode->getAttribute("valid_icon") ?: null;
+        $this->invalidIcon = $containerNode->getAttribute("invalid_icon") ?: null;
+        $this->inProgressIcon = $containerNode->getAttribute("inProgress_icon") ?: null;
+        $this->direction = $containerNode->getAttribute("direction") ?: null;
 
         foreach ($containerNode->childNodes as $child) {
             if ($child->nodeType !== XML_ELEMENT_NODE) {
@@ -39,7 +53,7 @@ class Container extends AbstractLayout
                     $this->fields[] = new File($child);
                     break;
                 case "textarea":
-                    $this->fields[] = new TextArea($child);
+                    $this->fields[] = new Textarea($child);
                     break;
                 case "triggerUseCase":
                     $this->fields[] = new UseCase($child);
@@ -53,18 +67,23 @@ class Container extends AbstractLayout
                 case "p":
                     $this->fields[] = new Paragraph($child);
                     break;
+                case "status":
+                    $this->fields[] = new Status($child);
+                    break;
+                case "thumb":
+                    $this->fields[] = new Thumb($child);
+                    break;
+                case "tabs":
+                    $this->fields[] = new Tabs($child);
+                    break;
+                case "toast":
+                    $this->fields[] = new Toast($child);
+                    break;
+                default:
+                    // Optionnel : log ou ignorer proprement
+                    break;
             }
         }
-    }
-
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    public function getLabel(): string
-    {
-        return $this->label;
     }
 
     public function getType(): ?string
@@ -77,19 +96,43 @@ class Container extends AbstractLayout
         return $this->fields;
     }
 
-    public function getJson(mixed $data) : array
+    public function getIndex(): ?int
+    {
+        return $this->index;
+    }
+
+    public function getValidIcon(): ?string
+    {
+        return $this->validIcon;
+    }
+
+    public function getInvalidIcon(): ?string
+    {
+        return $this->invalidIcon;
+    }
+
+    public function getInProgressIcon(): ?string
+    {
+        return $this->inProgressIcon;
+    }
+
+    public function getDirection(): ?string
+    {
+        return $this->direction;
+    }
+
+    public function omitJson(mixed $data): array
     {
         $jsonResponse = [
-            'id' => $this->id,
-            'label' => $this->label,
             'type' => (new \ReflectionClass($this))->getShortName(),
-            'fields' => [],
+            'direction' => $this->getDirection(),
+            'elements' => [],
         ];
 
         foreach ($this->fields as $field) {
             $fieldResponse = $field->getJson($data);
             if ($fieldResponse) {
-                $jsonResponse['fields'][] = $fieldResponse;
+                $jsonResponse['elements'][] = $fieldResponse;
             }
         }
 

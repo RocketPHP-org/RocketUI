@@ -7,10 +7,23 @@ use RocketPhp\RocketUI\UIEngine;
 use RocketPhp\RocketUI\Views\Form\Form;
 use stdClass;
 
+class address {
+    public $street = "123 Main St";
+    public $city = "Anytown";
+    public $state = "CA";
+    public $zip = "12345";
+}
+
 class FormTestInstance {
 
     public $name = "John Doe";
     public $email = "john@doe.com";
+
+    public $address;
+
+    public function __construct() {
+        $this->address = new address();
+    }
 
     public function getName() {
         return $this->name;

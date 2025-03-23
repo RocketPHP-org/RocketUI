@@ -1,16 +1,14 @@
 <?php
 namespace RocketPhp\RocketUI\Views\Form;
 
-use RocketPhp\RocketRule\Action\Action;
 use RocketPhp\RocketUI\Views\Form\Action\Button;
-use RocketPhp\RocketUI\Views\Form\Field\Abstract\AbstractField;
 use RocketPhp\RocketUI\Views\Form\Layout\Layout;
 
 class Form
 {
     private array $metadata;
     private Layout $layout;
-    //private Action $actions;
+    private array $actions;
 
     /**
      * @throws \Exception
@@ -20,9 +18,9 @@ class Form
         $xml = new \DOMDocument();
         $xml->load($xmlPath);
 
-        $this->metadata = $this->parseMetadata($xml);
         $this->layout = $this->parseLayout($xml);
-        //$this->actions = $this->parseActions($xml);
+        $this->metadata = $this->parseMetadata($xml);
+        $this->actions = $this->parseActions($xml);
     }
 
     private function parseMetadata(\DOMDocument $xml): array
@@ -36,6 +34,7 @@ class Form
             'title' => $metadataNode->getElementsByTagName("title")->item(0)?->nodeValue ?? '',
             'description' => $metadataNode->getElementsByTagName("description")->item(0)?->nodeValue ?? '',
             'version' => $metadataNode->getElementsByTagName("version")->item(0)?->nodeValue ?? '',
+            'layout_type' => $this->getLayout()->getType(),
         ];
     }
 
@@ -47,6 +46,34 @@ class Form
         }
 
         return new Layout($layoutNode);
+    }
+
+    private function parseActions(\DOMDocument $xml): array
+    {
+        $actions = [];
+        $actionsNode = $xml->getElementsByTagName("actions")->item(0);
+        if (!$actionsNode) {
+            return [];
+        }
+
+        foreach ($actionsNode->childNodes as $child) {
+            if ($child->nodeType !== XML_ELEMENT_NODE) {
+                continue;
+            }
+
+            switch ($child->nodeName) {
+                case "button":
+                    $actions[] = new Button($child);
+                    break;
+            }
+        }
+
+        return $actions;
+    }
+
+    public function getActions(): array
+    {
+        return $this->actions;
     }
 
 
@@ -63,10 +90,15 @@ class Form
     public function buildForm(mixed $data)
     {
         $layout = $this->getLayout()->getJson($data);
+        $actions = [];
+        foreach ($this->actions as $action) {
+            $actions[] = $action->getJson($data);
+        }
 
         $jsonResponse = json_encode([
             'metadata' => $this->getMetadata(),
             'layout' => $layout,
+            'actions' => $actions
         ]);
 
         return $jsonResponse;

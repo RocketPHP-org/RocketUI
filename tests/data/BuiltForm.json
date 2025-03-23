@@ -2,19 +2,38 @@
     "metadata": {
         "title": "Test Form",
         "description": "Test Description",
-        "version": "1.0"
+        "version": "1.0",
+        "layout_type": "modal"
     },
     "layout": [
         {
             "id": "main-container",
             "label": "Personal Information",
+            "required": false,
+            "readonly": false,
+            "component": "Container",
             "type": "Container",
-            "fields": [
+            "direction": "row",
+            "elements": [
+                {
+                    "required": false,
+                    "readonly": false,
+                    "component": "Header",
+                    "type": "header",
+                    "text": "Titre"
+                },
+                {
+                    "id": "info-toast",
+                    "label": "Important",
+                    "required": false,
+                    "readonly": false,
+                    "component": "Toast"
+                },
                 {
                     "required": false,
                     "readonly": false,
                     "condition": "(true)",
-                    "type": "Paragraph",
+                    "component": "Paragraph",
                     "text": "description"
                 },
                 {
@@ -25,6 +44,16 @@
                     "readonly": false,
                     "value": "John Doe",
                     "default": "John Dooe",
+                    "component": "Input",
+                    "type": "text"
+                },
+                {
+                    "name": "address.street",
+                    "label": "address",
+                    "required": false,
+                    "readonly": false,
+                    "value": "123 Main St",
+                    "component": "Input",
                     "type": "text"
                 },
                 {
@@ -33,6 +62,7 @@
                     "required": true,
                     "placeholder": "Enter your email",
                     "readonly": false,
+                    "component": "Input",
                     "type": "email"
                 },
                 {
@@ -40,6 +70,7 @@
                     "label": "Birth Date",
                     "required": false,
                     "readonly": false,
+                    "component": "Input",
                     "type": "date",
                     "format": "yyyy-mm-dd"
                 },
@@ -48,6 +79,7 @@
                     "label": "Birth Date",
                     "required": false,
                     "readonly": false,
+                    "component": "Input",
                     "type": "empty",
                     "format": "yyyy-mm-dd"
                 },
@@ -55,7 +87,7 @@
                     "name": "Check",
                     "required": false,
                     "readonly": false,
-                    "type": "UseCase",
+                    "component": "UseCase",
                     "method": "check_insi()",
                     "params": {
                         "param1": "value1"
@@ -66,6 +98,7 @@
                     "label": "File",
                     "required": true,
                     "readonly": false,
+                    "component": "File",
                     "multiple": false
                 },
                 {
@@ -73,6 +106,7 @@
                     "label": "Select",
                     "required": false,
                     "readonly": false,
+                    "component": "Select",
                     "type": "chips"
                 },
                 {
@@ -81,19 +115,25 @@
                     "required": false,
                     "readonly": false,
                     "csCondition": "true",
+                    "component": "Select",
                     "type": "chips"
                 },
                 {
                     "id": "job-function",
                     "label": "Job Function",
+                    "required": false,
+                    "readonly": false,
+                    "component": "Container",
                     "type": "Container",
-                    "fields": [
+                    "direction": "column",
+                    "elements": [
                         {
                             "id": "job-title",
                             "label": "Job Title",
                             "required": false,
                             "placeholder": "Enter your job title",
                             "readonly": false,
+                            "component": "Input",
                             "type": "text"
                         },
                         {
@@ -102,7 +142,51 @@
                             "required": false,
                             "placeholder": "Enter your company",
                             "readonly": false,
+                            "component": "Input",
                             "type": "text"
+                        },
+                        {
+                            "id": "additional-info",
+                            "label": "Additional Information",
+                            "required": false,
+                            "readonly": false,
+                            "component": "Tabs",
+                            "type": "Tabs",
+                            "elements": [
+                                {
+                                    "type": "Container",
+                                    "direction": null,
+                                    "elements": [
+                                        {
+                                            "id": "street",
+                                            "label": "Street",
+                                            "required": false,
+                                            "placeholder": "Enter your street",
+                                            "readonly": false,
+                                            "component": "Input",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "id": "city",
+                                            "label": "City",
+                                            "required": false,
+                                            "placeholder": "Enter your city",
+                                            "readonly": false,
+                                            "component": "Input",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "id": "zip",
+                                            "label": "Zip",
+                                            "required": false,
+                                            "placeholder": "Enter your zip",
+                                            "readonly": false,
+                                            "component": "Input",
+                                            "type": "text"
+                                        }
+                                    ]
+                                }
+                            ]
                         }
                     ]
                 },
@@ -112,6 +196,7 @@
                     "required": false,
                     "readonly": false,
                     "csCondition": "true",
+                    "component": "Select",
                     "type": "chips"
                 },
                 {
@@ -120,48 +205,76 @@
                     "required": false,
                     "readonly": false,
                     "csCondition": "true",
+                    "component": "Select",
                     "type": "chips"
                 }
             ]
         },
-        [
-            {
-                "id": "address",
-                "label": "Address",
-                "type": "Container",
-                "fields": [
-                    {
-                        "id": "street",
-                        "label": "Street",
-                        "required": false,
-                        "placeholder": "Enter your street",
-                        "readonly": false,
-                        "type": "text"
-                    },
-                    {
-                        "id": "city",
-                        "label": "City",
-                        "required": false,
-                        "placeholder": "Enter your city",
-                        "readonly": false,
-                        "type": "text"
-                    },
-                    {
-                        "id": "zip",
-                        "label": "Zip",
-                        "required": false,
-                        "placeholder": "Enter your zip",
-                        "readonly": false,
-                        "type": "text"
-                    }
-                ]
-            }
-        ],
         {
-            "id": null,
-            "label": null,
-            "type": "Toast",
-            "fields": []
+            "id": "additional-info",
+            "label": "Additional Information",
+            "required": false,
+            "readonly": false,
+            "component": "Tabs",
+            "type": "Tabs",
+            "elements": [
+                {
+                    "type": "Container",
+                    "direction": null,
+                    "elements": [
+                        {
+                            "id": "street",
+                            "label": "Street",
+                            "required": false,
+                            "placeholder": "Enter your street",
+                            "readonly": false,
+                            "component": "Input",
+                            "type": "text"
+                        },
+                        {
+                            "id": "city",
+                            "label": "City",
+                            "required": false,
+                            "placeholder": "Enter your city",
+                            "readonly": false,
+                            "component": "Input",
+                            "type": "text"
+                        },
+                        {
+                            "id": "zip",
+                            "label": "Zip",
+                            "required": false,
+                            "placeholder": "Enter your zip",
+                            "readonly": false,
+                            "component": "Input",
+                            "type": "text"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "info-toast",
+            "label": "Important",
+            "required": false,
+            "readonly": false,
+            "component": "Toast"
+        }
+    ],
+    "actions": [
+        {
+            "id": "submit-btn",
+            "label": "Submit",
+            "required": false,
+            "readonly": false,
+            "component": "Button"
+        },
+        {
+            "id": "reset-btn",
+            "label": "Reset",
+            "required": false,
+            "readonly": false,
+            "component": "Button"
         }
     ]
 }

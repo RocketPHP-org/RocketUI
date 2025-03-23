@@ -9,11 +9,12 @@
     </metadata>
 
     <layout type="modal">
-        <container id="main-container" label="Personal Information" type="card">
-            <header text="Titre"  hide="true" />
-
+        <container id="main-container" label="Personal Information" type="card" direction="row">
+            <header text="Titre"  visible="true" />
+            <toast id="info-toast" type="info" label="Important" description="Please fill all required fields"/>
             <p text="description" condition="(true)" />
             <input name="name" type="text" label="Name" required="true" placeholder="Enter your name" default="John Dooe"/>
+            <input name="address.street" type="text" label="address"/>
             <input id="email"
                    type="email"
                    label="Email"
@@ -30,7 +31,7 @@
             <file id="file" label="File" required="true" multiple="true" maxSize="1000000"/>
             <select name="select" label="Select" type="chips"/>
             <select name="select" label="Select" type="chips" csCondition="true"/>
-            <container id="job-function" label="Job Function">
+            <container id="job-function" label="Job Function" direction="column">
                 <input id="job-title" type="text" label="Job Title" placeholder="Enter your job title"/>
                 <input id="company" type="text" label="Company" placeholder="Enter your company"/>
                 <tabs id="additional-info" label="Additional Information">
