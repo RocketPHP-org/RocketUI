@@ -17,8 +17,6 @@ class Container extends AbstractLayout
     private string $label;
     private ?string $type;
     private array $fields = [];
-    private array $subContainers = [];
-
     public function __construct(\DOMElement $containerNode)
     {
         $this->id = $containerNode->getAttribute("id") ?? '';
@@ -47,7 +45,7 @@ class Container extends AbstractLayout
                     $this->fields[] = new UseCase($child);
                     break;
                 case "container":
-                    $this->subContainers[] = new Container($child);
+                    $this->fields[] = new Container($child);
                     break;
                 case "header":
                     $this->fields[] = new Header($child);
@@ -79,27 +77,20 @@ class Container extends AbstractLayout
         return $this->fields;
     }
 
-    public function getSubContainers(): array
-    {
-        return $this->subContainers;
-    }
-
     public function getJson(mixed $data) : array
     {
         $jsonResponse = [
             'id' => $this->id,
             'label' => $this->label,
-            'type' => $this->type,
+            'type' => (new \ReflectionClass($this))->getShortName(),
             'fields' => [],
-            'subContainers' => [],
         ];
 
         foreach ($this->fields as $field) {
-            $jsonResponse['fields'][] = $field->getJson($data);
-        }
-
-        foreach ($this->subContainers as $subContainer) {
-            $jsonResponse['subContainers'][] = $subContainer->getJson($data);
+            $fieldResponse = $field->getJson($data);
+            if ($fieldResponse) {
+                $jsonResponse['fields'][] = $fieldResponse;
+            }
         }
 
         return $jsonResponse;

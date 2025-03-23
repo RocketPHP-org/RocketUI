@@ -8,9 +8,7 @@ use RocketPhp\RocketUI\Views\Form\Layout\Abstract\AbstractLayout;
 class Layout extends AbstractLayout
 {
     private string $type;
-    private array $containers = [];
-    private ?Tabs $tabs = null;
-    private ?Toast $toast = null;
+    private array $elements = [];
 
     public function __construct(\DOMElement $layoutNode)
     {
@@ -23,13 +21,13 @@ class Layout extends AbstractLayout
 
             switch ($child->nodeName) {
                 case "container":
-                    $this->containers[] = new Container($child);
+                    $this->elements[] = new Container($child);
                     break;
                 case "tabs":
-                    $this->tabs = new Tabs($child);
+                    $this->elements[] = new Tabs($child);
                     break;
                 case "toast":
-                    $this->toast = new Toast($child);
+                    $this->elements[] = new Toast($child);
                     break;
             }
         }
@@ -40,26 +38,16 @@ class Layout extends AbstractLayout
         return $this->type;
     }
 
-    public function getContainers(): array
+    public function getElements(): array
     {
-        return $this->containers;
-    }
-
-    public function getTabs(): ?Tabs
-    {
-        return $this->tabs;
-    }
-
-    public function getToast(): ?Toast
-    {
-        return $this->toast;
+        return $this->elements;
     }
 
     public function getJson(mixed $data) : array
     {
         $jsonResponse = [];
 
-        foreach ($this->containers as $container) {
+        foreach ($this->elements as $container) {
             $jsonResponse[] = $container->getJson($data);
         }
 

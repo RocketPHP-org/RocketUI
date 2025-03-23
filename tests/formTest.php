@@ -67,9 +67,8 @@ class FormTest extends TestCase
         $data = new FormTestInstance();
 
         $json = new UIEngine();
-        $json = $json->buildForm($form, $data); // ici c'est déjà un JSON encodé (string)
+        $json = $json->buildForm($form, $data);
 
-        // Décoder puis ré-encoder pour l'indenter proprement
         $decoded = json_decode($json, true);
         $prettyJson = json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 

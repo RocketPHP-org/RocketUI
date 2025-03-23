@@ -42,4 +42,15 @@ class Input extends AbstractField
         return $this->currency;
     }
 
+    public function omitJson(mixed $data): ?array
+    {
+        return [
+            'type' => $this->getType(),
+            'min' => $this->getMin(),
+            'max' => $this->getMax(),
+            'format' => $this->getFormat(),
+            'currency' => $this->getCurrency()
+        ];
+    }
+
 }

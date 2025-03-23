@@ -10,10 +10,10 @@
 
     <layout type="modal">
         <container id="main-container" label="Personal Information" type="card">
-            <header text="Titre"  />
+            <header text="Titre"  hide="true" />
 
             <p text="description" condition="(true)" />
-            <input name="name" type="text" label="Name" required="true" placeholder="Enter your name"/>
+            <input name="name" type="text" label="Name" required="true" placeholder="Enter your name" default="John Dooe"/>
             <input id="email"
                    type="email"
                    label="Email"
@@ -22,7 +22,11 @@
             />
             <input id="birthdate" type="date" label="Birth Date" format="yyyy-mm-dd"/>
             <input id="birthdate" type="empty" label="Birth Date" format="yyyy-mm-dd"/>
-            <triggerUseCase id="trigger" name="Check" method="check_insi()"/>
+            <triggerUseCase name="Check" method="check_insi()">
+                <param name="param1" value="value1"/>
+                <param name="param1" value="value1"/>
+                <param name="param1" value="value1"/>
+            </triggerUseCase>
             <file id="file" label="File" required="true" multiple="true" maxSize="1000000"/>
             <select name="select" label="Select" type="chips"/>
             <select name="select" label="Select" type="chips" csCondition="true"/>
@@ -37,6 +41,8 @@
                     </container>
                 </tabs>
             </container>
+            <select name="select" label="Select" type="chips" csCondition="true"/>
+            <select name="select" label="Select" type="chips" csCondition="true"/>
 
         </container>
         <tabs id="additional-info" label="Additional Information">

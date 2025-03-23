@@ -10,7 +10,7 @@ abstract class AbstractCommonAttributes
     protected ?string $labelPosition;
     protected ?string $icon;
     protected ?string $iconPosition;
-    protected ?bool $required;
+    protected ?string $required;
     protected ?string $placeholder;
     protected ?string $width;
     protected ?string $readonly;
@@ -40,7 +40,7 @@ abstract class AbstractCommonAttributes
         $this->labelPosition = $node->getAttribute("label_position") ?: null;
         $this->icon = $node->getAttribute("icon") ?: null;
         $this->iconPosition = $node->getAttribute("icon_position") ?: null;
-        $this->required = $node->getAttribute("required") === "true";
+        $this->required = $node->getAttribute("required") ?: null;
         $this->placeholder = $node->getAttribute("placeholder") ?: null;
         $this->width = $node->getAttribute("width") ?: null;
         $this->readonly = $node->getAttribute("readonly") ?: null;
@@ -69,7 +69,7 @@ abstract class AbstractCommonAttributes
     public function getLabelPosition(): ?string { return $this->labelPosition; }
     public function getIcon(): ?string { return $this->icon; }
     public function getIconPosition(): ?string { return $this->iconPosition; }
-    public function isRequired(): ?bool { return $this->required; }
+    public function isRequired(): ?string { return $this->required; }
     public function getPlaceholder(): ?string { return $this->placeholder; }
     public function getWidth(): ?string { return $this->width; }
     public function isReadonly(): ?string { return $this->readonly; }

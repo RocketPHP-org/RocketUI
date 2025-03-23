@@ -58,7 +58,7 @@ abstract class AbstractField extends AbstractCommonAttributes
             }
         }
 
-        return array_filter($parentJson, fn($value) => $value !== null);
+        return array_filter($parentJson, fn($value) => ($value !== null) && ($value !== ''));
     }
 
     public function evaluateCondition(mixed $data, ?string $dsl): bool

@@ -8,6 +8,14 @@
 
     <xs:element name="triggerUseCase">
         <xs:complexType>
+            <xs:sequence>
+                <xs:element name="param" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:attribute name="name" type="xs:string" use="required"/>
+                        <xs:attribute name="value" type="xs:string" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
             <xs:attributeGroup ref="CommonAttributes"/>
             <xs:attribute name="method" type="xs:string" use="optional"/>
             <xs:attribute name="module" type="xs:string" use="optional"/>

@@ -48,4 +48,15 @@ class Tabs extends AbstractLayout
         return $this->containers;
     }
 
+    public function getJson(mixed $data) : array
+    {
+        $jsonResponse = [];
+
+        foreach ($this->containers as $container) {
+            $jsonResponse[] = $container->getJson($data);
+        }
+
+        return $jsonResponse;
+    }
+
 }

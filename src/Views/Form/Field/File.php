@@ -41,4 +41,14 @@ class File extends AbstractField
     {
         return $this->inputType;
     }
+    public function omitJson(mixed $data): ?array
+    {
+        return [
+            'accept' => $this->getAccept(),
+            'multiple' => $this->isMultiple(),
+            'max_size' => $this->getMaxSize(),
+            'type' => $this->getType(),
+            'input_type' => $this->getInputType()
+        ];
+    }
 }

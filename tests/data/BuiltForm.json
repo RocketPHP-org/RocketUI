@@ -8,9 +8,8 @@
         {
             "id": "main-container",
             "label": "Personal Information",
-            "type": "card",
+            "type": "Container",
             "fields": [
-                null,
                 {
                     "required": false,
                     "readonly": false,
@@ -25,7 +24,8 @@
                     "placeholder": "Enter your name",
                     "readonly": false,
                     "value": "John Doe",
-                    "type": "Input"
+                    "default": "John Dooe",
+                    "type": "text"
                 },
                 {
                     "id": "email",
@@ -33,42 +33,47 @@
                     "required": true,
                     "placeholder": "Enter your email",
                     "readonly": false,
-                    "type": "Input"
+                    "type": "email"
                 },
                 {
                     "id": "birthdate",
                     "label": "Birth Date",
                     "required": false,
                     "readonly": false,
-                    "type": "Input"
+                    "type": "date",
+                    "format": "yyyy-mm-dd"
                 },
                 {
                     "id": "birthdate",
                     "label": "Birth Date",
                     "required": false,
                     "readonly": false,
-                    "type": "Input"
+                    "type": "empty",
+                    "format": "yyyy-mm-dd"
                 },
                 {
-                    "id": "trigger",
                     "name": "Check",
                     "required": false,
                     "readonly": false,
-                    "type": "UseCase"
+                    "type": "UseCase",
+                    "method": "check_insi()",
+                    "params": {
+                        "param1": "value1"
+                    }
                 },
                 {
                     "id": "file",
                     "label": "File",
                     "required": true,
                     "readonly": false,
-                    "type": "File"
+                    "multiple": false
                 },
                 {
                     "name": "select",
                     "label": "Select",
                     "required": false,
                     "readonly": false,
-                    "type": "Select"
+                    "type": "chips"
                 },
                 {
                     "name": "select",
@@ -76,14 +81,12 @@
                     "required": false,
                     "readonly": false,
                     "csCondition": "true",
-                    "type": "Select"
-                }
-            ],
-            "subContainers": [
+                    "type": "chips"
+                },
                 {
                     "id": "job-function",
                     "label": "Job Function",
-                    "type": "",
+                    "type": "Container",
                     "fields": [
                         {
                             "id": "job-title",
@@ -91,7 +94,7 @@
                             "required": false,
                             "placeholder": "Enter your job title",
                             "readonly": false,
-                            "type": "Input"
+                            "type": "text"
                         },
                         {
                             "id": "company",
@@ -99,12 +102,66 @@
                             "required": false,
                             "placeholder": "Enter your company",
                             "readonly": false,
-                            "type": "Input"
+                            "type": "text"
                         }
-                    ],
-                    "subContainers": []
+                    ]
+                },
+                {
+                    "name": "select",
+                    "label": "Select",
+                    "required": false,
+                    "readonly": false,
+                    "csCondition": "true",
+                    "type": "chips"
+                },
+                {
+                    "name": "select",
+                    "label": "Select",
+                    "required": false,
+                    "readonly": false,
+                    "csCondition": "true",
+                    "type": "chips"
                 }
             ]
+        },
+        [
+            {
+                "id": "address",
+                "label": "Address",
+                "type": "Container",
+                "fields": [
+                    {
+                        "id": "street",
+                        "label": "Street",
+                        "required": false,
+                        "placeholder": "Enter your street",
+                        "readonly": false,
+                        "type": "text"
+                    },
+                    {
+                        "id": "city",
+                        "label": "City",
+                        "required": false,
+                        "placeholder": "Enter your city",
+                        "readonly": false,
+                        "type": "text"
+                    },
+                    {
+                        "id": "zip",
+                        "label": "Zip",
+                        "required": false,
+                        "placeholder": "Enter your zip",
+                        "readonly": false,
+                        "type": "text"
+                    }
+                ]
+            }
+        ],
+        {
+            "id": null,
+            "label": null,
+            "type": "Toast",
+            "fields": []
         }
     ]
 }
