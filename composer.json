@@ -1,0 +1,34 @@
+{
+    "name": "rocket-php/rocket-ui",
+    "type": "library",
+    "require": {
+        "phpunit/phpunit": "^11.5",
+        "spatie/phpunit-watcher": "^1.24",
+        "friendsofphp/php-cs-fixer": "^3.65",
+        "rocket-php/rocket-rule": "dev-main",
+        "rocket-php/rocket-gate": "dev-main",
+      "ext-dom": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "RocketPhp\\RocketUI\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Yanis Cherfa",
+            "email": "private@email.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/RocketPHP-org/RocketRule"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/RocketPHP-org/RocketGate"
+        }
+    ],
+    "minimum-stability": "stable"
+}

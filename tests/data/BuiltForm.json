@@ -1,0 +1,110 @@
+{
+    "metadata": {
+        "title": "Test Form",
+        "description": "Test Description",
+        "version": "1.0"
+    },
+    "layout": [
+        {
+            "id": "main-container",
+            "label": "Personal Information",
+            "type": "card",
+            "fields": [
+                null,
+                {
+                    "required": false,
+                    "readonly": false,
+                    "condition": "(true)",
+                    "type": "Paragraph",
+                    "text": "description"
+                },
+                {
+                    "name": "name",
+                    "label": "Name",
+                    "required": true,
+                    "placeholder": "Enter your name",
+                    "readonly": false,
+                    "value": "John Doe",
+                    "type": "Input"
+                },
+                {
+                    "id": "email",
+                    "label": "Email",
+                    "required": true,
+                    "placeholder": "Enter your email",
+                    "readonly": false,
+                    "type": "Input"
+                },
+                {
+                    "id": "birthdate",
+                    "label": "Birth Date",
+                    "required": false,
+                    "readonly": false,
+                    "type": "Input"
+                },
+                {
+                    "id": "birthdate",
+                    "label": "Birth Date",
+                    "required": false,
+                    "readonly": false,
+                    "type": "Input"
+                },
+                {
+                    "id": "trigger",
+                    "name": "Check",
+                    "required": false,
+                    "readonly": false,
+                    "type": "UseCase"
+                },
+                {
+                    "id": "file",
+                    "label": "File",
+                    "required": true,
+                    "readonly": false,
+                    "type": "File"
+                },
+                {
+                    "name": "select",
+                    "label": "Select",
+                    "required": false,
+                    "readonly": false,
+                    "type": "Select"
+                },
+                {
+                    "name": "select",
+                    "label": "Select",
+                    "required": false,
+                    "readonly": false,
+                    "csCondition": "true",
+                    "type": "Select"
+                }
+            ],
+            "subContainers": [
+                {
+                    "id": "job-function",
+                    "label": "Job Function",
+                    "type": "",
+                    "fields": [
+                        {
+                            "id": "job-title",
+                            "label": "Job Title",
+                            "required": false,
+                            "placeholder": "Enter your job title",
+                            "readonly": false,
+                            "type": "Input"
+                        },
+                        {
+                            "id": "company",
+                            "label": "Company",
+                            "required": false,
+                            "placeholder": "Enter your company",
+                            "readonly": false,
+                            "type": "Input"
+                        }
+                    ],
+                    "subContainers": []
+                }
+            ]
+        }
+    ]
+}

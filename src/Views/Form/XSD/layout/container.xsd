@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://rocket.com/rf-schema"
+           xmlns="http://rocket.com/rf-schema"
+           elementFormDefault="qualified">
+
+    <!-- Inclure les fichiers XSD contenant les types de champs -->
+    <xs:include schemaLocation="../fields/input.xsd"/>
+    <xs:include schemaLocation="../fields/usecase.xsd"/>
+    <xs:include schemaLocation="../fields/textarea.xsd"/>
+    <xs:include schemaLocation="../fields/select.xsd"/>
+    <xs:include schemaLocation="../fields/file.xsd"/>
+    <xs:include schemaLocation="../fields/paragraph.xsd"/>
+    <xs:include schemaLocation="../fields/header.xsd"/>
+    <xs:include schemaLocation="../fields/thumb.xsd"/>
+    <xs:include schemaLocation="../fields/status.xsd"/>
+    <xs:include schemaLocation="tabs.xsd"/>
+
+    <!-- Définition du type de container -->
+    <xs:simpleType name="ContainerStyleType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="group"/>
+            <xs:enumeration value="card"/>
+            <xs:enumeration value="modal"/>
+            <xs:enumeration value="empty"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Définition du type ContainerType -->
+    <xs:complexType name="ContainerType">
+        <xs:sequence>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="input"/>
+                <xs:element ref="triggerUseCase"/>
+                <xs:element ref="textarea"/>
+                <xs:element ref="select"/>
+                <xs:element ref="file"/>
+                <xs:element ref="p"/>
+                <xs:element ref="thumb"/>
+                <xs:element ref="status"/>
+                <xs:element ref="header"/>
+                <xs:element ref="tabs"/>
+                <xs:element name="container" type="ContainerType"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attributeGroup ref="CommonAttributes"/>
+        <xs:attribute name="type" type="ContainerStyleType" use="optional"/>
+        <xs:attribute name="index" type="xs:integer" use="optional"/>
+        <xs:attribute name="valid_icon" type="xs:string" use="optional"/>
+        <xs:attribute name="invalid_icon" type="xs:string" use="optional"/>
+        <xs:attribute name="inProgress_icon" type="xs:string" use="optional"/>
+    </xs:complexType>
+
+    <!-- Définition de l'élément container qui utilise ContainerType -->
+    <xs:element name="container" type="ContainerType"/>
+
+</xs:schema>

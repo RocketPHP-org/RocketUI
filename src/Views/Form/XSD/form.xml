@@ -1,0 +1,40 @@
+<RocketForm xmlns="http://rocket.com/rf-schema"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://rocket.com/rf-schema schema.xsd">
+
+    <metadata>
+        <title>Test Form</title>
+        <description>Test Description</description>
+        <version>1.0</version>
+    </metadata>
+
+    <layout>
+        <container id="main-container" label="Personal Information">
+            <input id="name" type="text" label="Name" required="true" placeholder="Enter your name"/>
+            <input id="email" type="email" label="Email" required="true" placeholder="Enter your email"/>
+            <input id="birthdate" type="date" label="Birth Date" format="yyyy-mm-dd"/>
+            <input id="birthdate" type="empty" label="Birth Date" format="yyyy-mm-dd"/>
+            <container id="job-function" label="Job Function">
+                <input id="job-title" type="text" label="Job Title" placeholder="Enter your job title"/>
+                <input id="company" type="text" label="Company" placeholder="Enter your company"/>
+            </container>
+        </container>
+
+
+        <tabs id="additional-info" label="Additional Information">
+            <container id="address" label="Address">
+                <input id="street" type="text" label="Street" placeholder="Enter your street"/>
+                <input id="city" type="text" label="City" placeholder="Enter your city"/>
+                <input id="zip" type="text" label="Zip" placeholder="Enter your zip"/>
+            </container>
+        </tabs>
+
+        <toast id="info-toast" type="info" label="Important" description="Please fill all required fields"/>
+    </layout>
+
+    <actions>
+        <button type="submit" label="Submit" id="submit-btn"/>
+        <button type="reset" label="Reset" id="reset-btn"/>
+    </actions>
+
+</RocketForm>

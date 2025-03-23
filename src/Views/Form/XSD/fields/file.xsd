@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://rocket.com/rf-schema"
+           xmlns="http://rocket.com/rf-schema"
+           elementFormDefault="qualified">
+
+    <xs:element name="file">
+        <xs:complexType>
+            <xs:attributeGroup ref="CommonAttributes"/>
+            <xs:attribute name="accept" type="xs:string" use="optional"/>
+            <xs:attribute name="multiple" type="xs:boolean" use="optional"/>
+            <xs:attribute name="maxSize" type="xs:integer" use="optional"/>
+            <xs:attribute name="type" type="FileType" use="optional"/>
+            <xs:attribute name="inputType" type="FileInputType" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="FileType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="file"/>
+            <xs:enumeration value="image"/>
+            <xs:enumeration value="video"/>
+            <xs:enumeration value="audio"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="FileInputType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="input"/>
+            <xs:enumeration value="dropzone"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

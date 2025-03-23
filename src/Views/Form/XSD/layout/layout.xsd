@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://rocket.com/rf-schema"
+           xmlns="http://rocket.com/rf-schema"
+           elementFormDefault="qualified">
+
+    <xs:include schemaLocation="container.xsd"/>
+    <xs:include schemaLocation="tabs.xsd"/>
+    <xs:include schemaLocation="toast.xsd"/>
+
+    <xs:simpleType name="LayoutStyleType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="modal"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Définition du Layout -->
+    <xs:complexType name="LayoutType">
+        <xs:sequence>
+            <xs:element name="container" type="ContainerType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="tabs" type="TabsType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="toast" type="ToastType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="LayoutStyleType" use="optional"/>
+    </xs:complexType>
+
+</xs:schema>

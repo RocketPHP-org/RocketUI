@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://rocket.com/rf-schema"
+           xmlns="http://rocket.com/rf-schema"
+           elementFormDefault="qualified">
+
+    <xs:element name="input">
+        <xs:complexType>
+            <xs:attributeGroup ref="CommonAttributes"/>
+            <xs:attribute name="type" type="InputType" use="required"/>
+            <xs:attribute name="min" type="xs:string" use="optional"/>
+            <xs:attribute name="max" type="xs:string" use="optional"/>
+            <xs:attribute name="format" type="xs:string" use="optional"/>
+            <xs:attribute name="currency" type="xs:string" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="InputType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="text"/>
+            <xs:enumeration value="email"/>
+            <xs:enumeration value="password"/>
+            <xs:enumeration value="number"/>
+            <xs:enumeration value="currency"/>
+            <xs:enumeration value="tel"/>
+            <xs:enumeration value="url"/>
+            <xs:enumeration value="date"/>
+            <xs:enumeration value="datetime"/>
+            <xs:enumeration value="time"/>
+            <xs:enumeration value="color"/>
+            <xs:enumeration value="range"/>
+            <xs:enumeration value="file"/>
+            <xs:enumeration value="empty"/>
+            <xs:enumeration value="label"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

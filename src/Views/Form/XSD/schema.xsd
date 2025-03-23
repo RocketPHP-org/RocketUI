@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://rocket.com/rf-schema"
+           xmlns="http://rocket.com/rf-schema"
+           elementFormDefault="qualified">
+
+    <!-- Inclusion des fichiers XSD -->
+    <xs:include schemaLocation="layout/layout.xsd"/>
+    <xs:include schemaLocation="actions/button.xsd"/>
+    <xs:include schemaLocation="layout/container.xsd"/>
+    <xs:include schemaLocation="layout/tabs.xsd"/>
+    <xs:include schemaLocation="layout/toast.xsd"/>
+
+    <!-- Élément principal -->
+    <xs:element name="RocketForm">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="metadata" type="MetadataType"/>
+                <xs:element name="layout" type="LayoutType"/>
+                <xs:element name="actions" type="ActionsType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Metadata -->
+    <xs:complexType name="MetadataType">
+        <xs:sequence>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="version" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Actions -->
+<xs:complexType name="ActionsType">
+    <xs:sequence>
+        <xs:element name="button" type="ButtonType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+</xs:complexType>
+
+
+<!-- Attributes common to all fields -->
+<xs:attributeGroup name="CommonAttributes">
+    <xs:attribute name="id" type="xs:string" use="optional"/>
+    <xs:attribute name="name" type="xs:string" use="optional"/>
+    <xs:attribute name="label" type="xs:string" use="optional"/>
+    <xs:attribute name="label_position" type="xs:string" use="optional"/>
+    <xs:attribute name="icon" type="xs:string" use="optional"/>
+    <xs:attribute name="icon_position" type="xs:string" use="optional"/>
+    <xs:attribute name="required" type="xs:boolean" use="optional"/>
+    <xs:attribute name="placeholder" type="xs:string" use="optional"/>
+    <xs:attribute name="width" type="xs:string" use="optional"/>
+    <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+    <xs:attribute name="hide" type="xs:string" use="optional"/>
+    <xs:attribute name="visible" type="xs:string" use="optional"/>
+    <xs:attribute name="right_label" type="xs:string" use="optional"/>
+    <xs:attribute name="helper_label" type="xs:string" use="optional"/>
+    <xs:attribute name="helper" type="xs:string" use="optional"/>
+    <xs:attribute name="error" type="xs:string" use="optional"/>
+    <xs:attribute name="tooltip" type="xs:string" use="optional"/>
+    <xs:attribute name="value" type="xs:string" use="optional"/>
+    <xs:attribute name="hideIf" type="xs:string" use="optional"/>
+    <xs:attribute name="default" type="xs:string" use="optional"/>
+    <xs:attribute name="showIf" type="xs:string" use="optional"/>
+    <xs:attribute name="disableIf" type="xs:string" use="optional"/>
+    <xs:attribute name="enableIf" type="xs:string" use="optional"/>
+    <xs:attribute name="invalidIf" type="xs:string" use="optional"/>
+    <xs:attribute name="condition" type="xs:string" use="optional"/>
+    <xs:attribute name="csCondition" type="xs:string" use="optional"/>
+    <xs:attribute name="on_change" type="xs:string" use="optional"/>
+</xs:attributeGroup>
+
+
+</xs:schema>

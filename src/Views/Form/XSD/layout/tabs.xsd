@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://rocket.com/rf-schema"
+           xmlns="http://rocket.com/rf-schema"
+           elementFormDefault="qualified">
+
+    <!-- Définition du type TabsType -->
+    <xs:complexType name="TabsType">
+        <xs:sequence>
+            <xs:element name="container" type="ContainerType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="defaultTab" type="xs:string" use="optional"/>
+        <xs:attributeGroup ref="CommonAttributes"/>
+    </xs:complexType>
+
+    <!-- Définition de l'élément tabs qui utilise TabsType -->
+    <xs:element name="tabs" type="TabsType"/>
+</xs:schema>

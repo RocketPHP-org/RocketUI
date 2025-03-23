@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://rocket.com/rf-schema"
+           xmlns="http://rocket.com/rf-schema"
+           elementFormDefault="qualified">
+
+    <xs:element name="select">
+        <xs:complexType>
+            <xs:attributeGroup ref="CommonAttributes"/>
+            <xs:attribute name="badge" type="xs:string" use="optional"/>
+            <xs:attribute name="chip" type="xs:string" use="optional"/>
+            <xs:attribute name="chip_position" type="xs:string" use="optional"/>
+            <xs:attribute name="description" type="xs:string" use="optional"/>
+            <xs:attribute name="help-choice" type="xs:string" use="optional"/>
+            <xs:attribute name="inline_card_thumbnails" type="xs:string" use="optional"/>
+            <xs:attribute name="type" type="SelectType" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="SelectType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="selectBox"/>
+            <xs:enumeration value="radio"/>
+            <xs:enumeration value="chips"/>
+            <xs:enumeration value="card"/>
+            <xs:enumeration value="inline_card"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>
