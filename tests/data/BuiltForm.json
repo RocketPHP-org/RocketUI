@@ -17,10 +17,20 @@
             "elements": [
                 {
                     "required": false,
+                    "width": "1/3",
                     "readonly": false,
                     "component": "Header",
                     "type": "header",
                     "text": "Titre"
+                },
+                {
+                    "id": "thumb",
+                    "name": "address.id",
+                    "label": "Thumb",
+                    "required": false,
+                    "readonly": false,
+                    "value": "100",
+                    "component": "Thumb"
                 },
                 {
                     "id": "info-toast",
@@ -35,6 +45,14 @@
                     "condition": "(true)",
                     "component": "Paragraph",
                     "text": "description"
+                },
+                {
+                    "label": "Description",
+                    "required": true,
+                    "placeholder": "Enter your description",
+                    "readonly": false,
+                    "value": "Yanis",
+                    "component": "Textarea"
                 },
                 {
                     "name": "name",
@@ -102,21 +120,65 @@
                     "multiple": false
                 },
                 {
-                    "name": "select",
-                    "label": "Select",
-                    "required": false,
+                    "name": "status",
+                    "label": "Status",
+                    "required": true,
                     "readonly": false,
-                    "component": "Select",
-                    "type": "chips"
+                    "component": "Status",
+                    "transitions": {
+                        "pending": [
+                            "shipped",
+                            "cancelled"
+                        ],
+                        "shipped": [
+                            "delivered"
+                        ],
+                        "delivered": []
+                    }
                 },
                 {
-                    "name": "select",
+                    "name": "address",
                     "label": "Select",
                     "required": false,
                     "readonly": false,
                     "csCondition": "true",
                     "component": "Select",
-                    "type": "chips"
+                    "type": "chips",
+                    "multi": false
+                },
+                {
+                    "name": "user",
+                    "required": false,
+                    "readonly": false,
+                    "component": "Select",
+                    "type": "selectBox",
+                    "remote": "/api/users",
+                    "valueField": "id",
+                    "labelField": "fullName",
+                    "multi": true,
+                    "filters": {
+                        "name": "search",
+                        "order[id]": "asc",
+                        "order[name]": "desc"
+                    }
+                },
+                {
+                    "name": "country",
+                    "required": false,
+                    "readonly": false,
+                    "component": "Select",
+                    "type": "chips",
+                    "multi": true,
+                    "options": [
+                        {
+                            "label": "France",
+                            "value": "FR"
+                        },
+                        {
+                            "label": "Spain",
+                            "value": "ES"
+                        }
+                    ]
                 },
                 {
                     "id": "job-function",
@@ -197,7 +259,8 @@
                     "readonly": false,
                     "csCondition": "true",
                     "component": "Select",
-                    "type": "chips"
+                    "type": "chips",
+                    "multi": false
                 },
                 {
                     "name": "select",
@@ -206,7 +269,8 @@
                     "readonly": false,
                     "csCondition": "true",
                     "component": "Select",
-                    "type": "chips"
+                    "type": "chips",
+                    "multi": false
                 }
             ]
         },
@@ -267,14 +331,16 @@
             "label": "Submit",
             "required": false,
             "readonly": false,
-            "component": "Button"
+            "component": "Button",
+            "type": "submit"
         },
         {
             "id": "reset-btn",
             "label": "Reset",
             "required": false,
             "readonly": false,
-            "component": "Button"
+            "component": "Button",
+            "type": "reset"
         }
     ]
 }

@@ -55,6 +55,12 @@ abstract class AbstractField extends AbstractCommonAttributes
             'component' => (new \ReflectionClass($this))->getShortName(),
         ];
 
+        //'transitions' => $data::$FLOW['transitions']['status']
+        if ($data::$FLOW['transitions'][$this->getName()]) {
+            $parentJson['transitions'] = $data::$FLOW['transitions'][$this->getName()];
+        }
+
+
         if (method_exists($this, 'omitJson')) {
             $additional = $this->omitJson($data);
             if (is_array($additional)) {

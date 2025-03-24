@@ -4,19 +4,7 @@
            xmlns="http://rocket.com/rf-schema"
            elementFormDefault="qualified">
 
-    <xs:element name="select">
-        <xs:complexType>
-            <xs:attributeGroup ref="CommonAttributes"/>
-            <xs:attribute name="badge" type="xs:string" use="optional"/>
-            <xs:attribute name="chip" type="xs:string" use="optional"/>
-            <xs:attribute name="chip_position" type="xs:string" use="optional"/>
-            <xs:attribute name="description" type="xs:string" use="optional"/>
-            <xs:attribute name="help-choice" type="xs:string" use="optional"/>
-            <xs:attribute name="inline_card_thumbnails" type="xs:string" use="optional"/>
-            <xs:attribute name="type" type="SelectType" use="required"/>
-        </xs:complexType>
-    </xs:element>
-
+    <!-- Types -->
     <xs:simpleType name="SelectType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="selectBox"/>
@@ -27,4 +15,48 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <!-- Élément "option" -->
+    <xs:element name="option">
+        <xs:complexType>
+            <xs:attribute name="label" type="xs:string" use="required"/>
+            <xs:attribute name="value" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Élément "filter" -->
+    <xs:element name="filter">
+        <xs:complexType>
+            <xs:attribute name="field" type="xs:string" use="required"/>
+            <xs:attribute name="value" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Élément "select" -->
+    <xs:element name="select">
+        <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="1">
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:element ref="option"/>
+                    <xs:element ref="filter"/>
+                </xs:choice>
+            </xs:sequence>
+
+            <xs:attributeGroup ref="CommonAttributes"/>
+            <xs:attribute name="badge" type="xs:string" use="optional"/>
+            <xs:attribute name="chip" type="xs:string" use="optional"/>
+            <xs:attribute name="chip_position" type="xs:string" use="optional"/>
+            <xs:attribute name="description" type="xs:string" use="optional"/>
+            <xs:attribute name="help-choice" type="xs:string" use="optional"/>
+            <xs:attribute name="inline_card_thumbnails" type="xs:string" use="optional"/>
+            <xs:attribute name="type" type="SelectType" use="required"/>
+
+            <!-- chargement distant -->
+            <xs:attribute name="remote" type="xs:string" use="optional"/>
+            <xs:attribute name="valueField" type="xs:string" use="optional"/>
+            <xs:attribute name="labelField" type="xs:string" use="optional"/>
+
+            <!-- nouveau -->
+            <xs:attribute name="multi" type="xs:boolean" use="optional"/>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

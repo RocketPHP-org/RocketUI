@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RocketGrid xmlns="http://rocket.com/rg-schema"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://rocket.com/rg-schema ../../src/Views/Grid/XSD/schema.xsd">
+
+    <metadata>
+        <title>Test</title>
+        <description>Test XML valide</description>
+        <version>1.0</version>
+    </metadata>
+
+    <columns>
+        <column id="c1" type="string">
+            <label>Nom</label>
+            <field>name</field>
+        </column>
+    </columns>
+
+    <actions>
+        <button id="save" name="Enregistrer" type="submit"/>
+    </actions>
+
+</RocketGrid>

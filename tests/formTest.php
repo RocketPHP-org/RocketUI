@@ -8,6 +8,7 @@ use RocketPhp\RocketUI\Views\Form\Form;
 use stdClass;
 
 class address {
+    public $id = 100;
     public $street = "123 Main St";
     public $city = "Anytown";
     public $state = "CA";
@@ -16,6 +17,9 @@ class address {
 
 class FormTestInstance {
 
+    public static array $FLOW = ["allowed_values" => ["Status" => ["pending", "shipped", "delivered", "cancelled"]], "transitions" => ["status" => ["pending" => ["shipped", "cancelled"], "shipped" => ["delivered"], "delivered" => []]]];
+
+    public $id = 1;
     public $name = "John Doe";
     public $email = "john@doe.com";
 

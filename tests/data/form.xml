@@ -10,9 +10,11 @@
 
     <layout type="modal">
         <container id="main-container" label="Personal Information" type="card" direction="row">
-            <header text="Titre"  visible="true" />
+            <header text="Titre"  visible="true" width="1/3" />
+            <thumb id="thumb" label="Thumb" name="address.id" />
             <toast id="info-toast" type="info" label="Important" description="Please fill all required fields"/>
             <p text="description" condition="(true)" />
+            <textarea value="Yanis" label="Description" required="true" placeholder="Enter your description"/>
             <input name="name" type="text" label="Name" required="true" placeholder="Enter your name" default="John Dooe"/>
             <input name="address.street" type="text" label="address"/>
             <input id="email"
@@ -29,8 +31,22 @@
                 <param name="param1" value="value1"/>
             </triggerUseCase>
             <file id="file" label="File" required="true" multiple="true" maxSize="1000000"/>
-            <select name="select" label="Select" type="chips"/>
-            <select name="select" label="Select" type="chips" csCondition="true"/>
+            <status name="status" label="Status" required="true" value="active"/>
+            <select
+                    name="address"
+                    label="Select"
+                    type="chips"
+                    csCondition="true"
+            />
+            <select name="user" type="selectBox" remote="/api/users" labelField="fullName" valueField="id" multi="true">
+                <filter field="name" value="search"/>
+                <filter field="order[id]" value="asc"/>
+                <filter field="order[name]" value="desc"/>
+            </select>
+            <select name="country" type="chips" multi="true">
+                <option label="France" value="FR"/>
+                <option label="Spain" value="ES"/>
+            </select>
             <container id="job-function" label="Job Function" direction="column">
                 <input id="job-title" type="text" label="Job Title" placeholder="Enter your job title"/>
                 <input id="company" type="text" label="Company" placeholder="Enter your company"/>

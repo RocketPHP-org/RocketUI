@@ -30,5 +30,8 @@
             "url": "https://github.com/RocketPHP-org/RocketGate"
         }
     ],
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+  "require-dev": {
+    "ext-libxml": "*"
+  }
 }
