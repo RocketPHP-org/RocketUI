@@ -56,8 +56,10 @@ abstract class AbstractField extends AbstractCommonAttributes
         ];
 
         //'transitions' => $data::$FLOW['transitions']['status']
-        if ($data::$FLOW['transitions'][$this->getName()]) {
-            $parentJson['transitions'] = $data::$FLOW['transitions'][$this->getName()];
+        $name = $this->getName();
+
+        if (!empty($name) && isset($data::$FLOW['transitions'][$name])) {
+            $parentJson['transitions'] = $data::$FLOW['transitions'][$name];
         }
 
 

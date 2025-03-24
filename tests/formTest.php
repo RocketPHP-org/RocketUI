@@ -45,6 +45,37 @@ class FormTestInstance {
 }
 
 
+
+class EmptyFormTestInstance {
+
+    public static array $FLOW = ["allowed_values" => ["Status" => ["pending", "shipped", "delivered", "cancelled"]], "transitions" => ["status" => ["pending" => ["shipped", "cancelled"], "shipped" => ["delivered"], "delivered" => []]]];
+
+    public $id;
+    public $name;
+    public $email;
+
+    public $address;
+
+    public function __construct() {
+        $this->address = new address();
+    }
+
+    public function getName() {
+        return $this->name;
+    }
+
+    public function getEmail() {
+        return $this->email;
+    }
+
+    public function isValid(): bool
+    {
+        return true;
+    }
+
+}
+
+
 class FormTest extends TestCase
 {
     public function testFormXSDValidation()
@@ -85,6 +116,22 @@ class FormTest extends TestCase
 
         $json = new UIEngine();
         $json = $json->buildForm($form, $data);
+
+        $decoded = json_decode($json, true);
+        $prettyJson = json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+        file_put_contents(__DIR__ . '/data/BuiltForm.json', $prettyJson);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testBuildNewUI()
+    {
+        $form = new Form(__DIR__ . '/data/form.xml');
+
+        $json = new UIEngine();
+        $json = $json->buildForm($form, new EmptyFormTestInstance());
 
         $decoded = json_decode($json, true);
         $prettyJson = json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
