@@ -13,16 +13,6 @@ class UIEngine
 
     public function __construct()
     {
-/*        if ($viewDefinition instanceof Form)
-        {
-            return $this->buildForm($viewDefinition, $data);
-
-        }else if ($viewDefinition instanceof Grid)
-        {
-            return $this->buildGrid($viewDefinition, $data);
-        }else{
-            throw new \Exception("Invalid view definition");
-        }*/
 
     }
 
@@ -34,6 +24,7 @@ class UIEngine
     public function buildGrid(Grid $viewDefinition, mixed $data)
     {
 
+        return $viewDefinition->buildGrid($data);
     }
 
 }

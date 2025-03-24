@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://rocket.com/rg-schema"
+    xmlns="http://rocket.com/rg-schema"
+    elementFormDefault="qualified">
+
+    <!-- Inclusion des fichiers externes -->
+    <xs:include schemaLocation="columns/column.xsd"/>
+    <xs:include schemaLocation="actions/button.xsd"/>
+    <xs:include schemaLocation="toggle/toggle.xsd"/>
+
+    <!-- Élément principal -->
+    <xs:element name="RocketGrid">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="metadata" type="MetadataType"/>
+                <xs:element name="toggles" type="TogglesType" minOccurs="0"/>
+                <xs:element name="columns" type="ColumnType"/>
+                <xs:element name="actions" type="ActionsType" minOccurs="0"/>
+                <xs:element name="gridOptions" type="GridOptionsType" minOccurs="0"/>
+                <xs:element name="rowActions" type="RowActionsType" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Metadata -->
+    <xs:complexType name="MetadataType">
+        <xs:sequence>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="version" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TogglesType">
+        <xs:sequence>
+            <xs:element name="toggle" type="ToggleType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Actions -->
+    <xs:complexType name="ActionsType">
+        <xs:sequence>
+            <xs:element name="button" type="ButtonType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Grid options -->
+    <xs:complexType name="GridOptionsType">
+        <xs:sequence>
+            <xs:element name="pagination" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="pageSize" type="xs:int"/>
+                    <xs:attribute name="pageSizeOptions" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="selection" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="mode" type="xs:string"/> <!-- single | multiple -->
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="export" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="format" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="RowActionsType">
+        <xs:sequence>
+            <xs:element name="button" type="ButtonType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://rocket.com/rg-schema"
+    xmlns="http://rocket.com/rg-schema"
+    elementFormDefault="qualified">
+
+    <xs:complexType name="ColumnType">
+        <xs:sequence>
+            <xs:element name="column" type="ColumnDefinitionType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ColumnDefinitionType">
+        <xs:attribute name="id" type="xs:string"/>
+        <xs:attribute name="type" type="xs:string"/>
+        <xs:attribute name="label" type="xs:string"/>
+        <xs:attribute name="field" type="xs:string"/>
+        <xs:attribute name="sortable" type="xs:boolean"/>
+        <xs:attribute name="sortDirection" type="xs:string"/>
+        <xs:attribute name="filterable" type="xs:boolean"/>
+        <xs:attribute name="filterType" type="xs:string"/>
+        <xs:attribute name="resizable" type="xs:boolean"/>
+        <xs:attribute name="hidden" type="xs:string"/>
+        <xs:attribute name="align" type="xs:string"/>
+        <xs:attribute name="class" type="xs:string"/>
+        <xs:attribute name="template" type="xs:string"/>
+        <xs:attribute name="editable" type="xs:boolean"/>
+        <xs:attribute name="editorType" type="xs:string"/>
+        <xs:attribute name="computed" type="xs:boolean"/>
+        <xs:attribute name="expression" type="xs:string"/>
+        <xs:attribute name="visibleIf" type="xs:string"/>
+    </xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,108 @@
+{
+    "metadata": {
+        "title": "Grille utilisateurs",
+        "description": "Liste enrichie avec options",
+        "version": "2.0"
+    },
+    "toggles": [
+        {
+            "name": "isActive",
+            "label": "Actif",
+            "type": "boolean",
+            "icon": "fa fa-check",
+            "icon_position": "left",
+            "condition": "status === 'active'",
+            "params": {
+                "targetField": "active",
+                "trueLabel": "Oui",
+                "falseLabel": "Non"
+            }
+        }
+    ],
+    "columns": [
+        {
+            "id": "c1",
+            "type": "string",
+            "label": "Nom",
+            "field": "name",
+            "sortable": true,
+            "filterable": true,
+            "hidden": "(name,'=','Yanis'",
+            "align": "left",
+            "class": "autocolumn"
+        },
+        {
+            "id": "c2",
+            "type": "number",
+            "label": "Âge",
+            "field": "age",
+            "filterType": "number",
+            "editable": true,
+            "editorType": "number"
+        },
+        {
+            "id": "c3",
+            "type": "string",
+            "label": "Nom complet",
+            "field": "fullName",
+            "computed": true,
+            "expression": "firstName + ' ' + lastName"
+        }
+    ],
+    "actions": [
+        {
+            "id": "btn1",
+            "name": "Ajouter",
+            "label": "Ajouter un utilisateur",
+            "type": "primary"
+        },
+        {
+            "id": "btn2",
+            "name": "Exporter",
+            "type": "secondary"
+        }
+    ],
+    "rowActions": [
+        {
+            "id": "disableUser",
+            "name": "Désactiver",
+            "condition": "status === 'active'",
+            "type": "danger"
+        },
+        {
+            "id": "editUser",
+            "name": "Modifier",
+            "type": "primary"
+        },
+        {
+            "id": "btn3",
+            "name": "Open",
+            "tooltip": "Ouvrir la fiche utilisateur",
+            "type": "open",
+            "params": {
+                "openIn": "modal",
+                "size": "large"
+            }
+        }
+    ],
+    "gridOptions": {
+        "pagination": {
+            "pageSize": "20",
+            "pageSizeOptions": [
+                "10",
+                "20",
+                "50"
+            ]
+        },
+        "selection": {
+            "mode": "multiple"
+        },
+        "export": {
+            "formats": [
+                "csv",
+                "excel",
+                "pdf"
+            ]
+        }
+    }
+}

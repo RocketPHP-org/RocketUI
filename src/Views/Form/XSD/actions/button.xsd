@@ -6,6 +6,7 @@
 
     <xs:complexType name="ButtonType">
         <xs:attribute name="type" type="xs:string" use="required"/>
+        <xs:attribute name="confirm" type="xs:string"/>
         <xs:attributeGroup ref="CommonAttributes"/>
     </xs:complexType>
 

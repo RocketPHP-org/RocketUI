@@ -19,9 +19,9 @@
                     "required": false,
                     "width": "1/3",
                     "readonly": false,
+                    "value": "Yanis",
                     "component": "Header",
-                    "type": "header",
-                    "text": "Titre"
+                    "type": "header"
                 },
                 {
                     "id": "thumb",
@@ -328,11 +328,13 @@
     "actions": [
         {
             "id": "submit-btn",
+            "name": "submit",
             "label": "Submit",
             "required": false,
             "readonly": false,
             "component": "Button",
-            "type": "submit"
+            "type": "primary",
+            "confirm": "Are you sure?"
         },
         {
             "id": "reset-btn",

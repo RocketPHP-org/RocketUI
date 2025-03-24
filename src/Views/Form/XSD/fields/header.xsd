@@ -7,7 +7,6 @@
     <xs:element name="header">
         <xs:complexType>
             <xs:attributeGroup ref="CommonAttributes"/>
-            <xs:attribute name="text" type="xs:string" use="required"/>
         </xs:complexType>
     </xs:element>
 

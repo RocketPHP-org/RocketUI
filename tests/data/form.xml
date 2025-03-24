@@ -10,7 +10,7 @@
 
     <layout type="modal">
         <container id="main-container" label="Personal Information" type="card" direction="row">
-            <header text="Titre"  visible="true" width="1/3" />
+            <header value="Yanis"  visible="true" width="1/3" />
             <thumb id="thumb" label="Thumb" name="address.id" />
             <toast id="info-toast" type="info" label="Important" description="Please fill all required fields"/>
             <p text="description" condition="(true)" />
@@ -73,7 +73,7 @@
     </layout>
 
     <actions>
-        <button type="submit" label="Submit" id="submit-btn"/>
+        <button name="submit" type="primary" label="Submit" id="submit-btn" confirm="Are you sure?"/>
         <button type="reset" label="Reset" id="reset-btn"/>
     </actions>
 
