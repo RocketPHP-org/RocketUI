@@ -60,7 +60,6 @@
                     "required": true,
                     "placeholder": "Enter your name",
                     "readonly": false,
-                    "value": "John Doe",
                     "default": "John Dooe",
                     "component": "Input",
                     "type": "text"
