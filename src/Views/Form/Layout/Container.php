@@ -124,7 +124,7 @@ class Container extends AbstractLayout
     public function omitJson(mixed $data): array
     {
         $jsonResponse = [
-            'type' => (new \ReflectionClass($this))->getShortName(),
+            'type' => $this->getType() ?: (new \ReflectionClass($this))->getShortName(),
             'direction' => $this->getDirection(),
             'elements' => [],
         ];
