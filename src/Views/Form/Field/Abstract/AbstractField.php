@@ -53,7 +53,7 @@ abstract class AbstractField extends AbstractCommonAttributes
             'condition' => $this->getCondition(),
             'csCondition' => $this->getCsCondition(),
             'component' => method_exists($this, 'getType') && $this->getType()
-                ? $this->getType()
+                ? (new \ReflectionClass($this))->getShortName().'_'.$this->getType()
                 : (new \ReflectionClass($this))->getShortName(),
         ];
 

@@ -40,7 +40,7 @@ abstract class AbstractLayout extends AbstractCommonAttributes
             'onChange' => $this->getOnChange(),
             'condition' => $this->getCondition(),
             'component' => method_exists($this, 'getType') && $this->getType()
-                ? $this->getType()
+                ? (new \ReflectionClass($this))->getShortName().'_'.$this->getType()
                 : (new \ReflectionClass($this))->getShortName(),
             ];
 
