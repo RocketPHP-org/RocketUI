@@ -52,7 +52,9 @@ abstract class AbstractField extends AbstractCommonAttributes
             'onChange' => $this->getOnChange(),
             'condition' => $this->getCondition(),
             'csCondition' => $this->getCsCondition(),
-            'component' => (new \ReflectionClass($this))->getShortName(),
+            'component' => method_exists($this, 'getType') && $this->getType()
+                ? $this->getType()
+                : (new \ReflectionClass($this))->getShortName(),
         ];
 
         //'transitions' => $data::$FLOW['transitions']['status']

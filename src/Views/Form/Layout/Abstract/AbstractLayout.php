@@ -39,8 +39,10 @@ abstract class AbstractLayout extends AbstractCommonAttributes
             'invalidIf' => $this->getInvalidIf(),
             'onChange' => $this->getOnChange(),
             'condition' => $this->getCondition(),
-            'component' => (new \ReflectionClass($this))->getShortName(),
-        ];
+            'component' => method_exists($this, 'getType') && $this->getType()
+                ? $this->getType()
+                : (new \ReflectionClass($this))->getShortName(),
+            ];
 
         if (method_exists($this, 'omitJson')) {
             $additional = $this->omitJson($data);
