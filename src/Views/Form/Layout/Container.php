@@ -22,7 +22,6 @@ class Container extends AbstractLayout
     private ?string $invalidIcon;
     private ?string $inProgressIcon;
     private ?string $direction;
-
     private array $fields = [];
 
     public function __construct(\DOMElement $containerNode)
@@ -126,6 +125,7 @@ class Container extends AbstractLayout
         $jsonResponse = [
             'type' => $this->getType() ?: (new \ReflectionClass($this))->getShortName(),
             'direction' => $this->getDirection(),
+            'label' => $this->getLabel(),
             'elements' => [],
         ];
 
