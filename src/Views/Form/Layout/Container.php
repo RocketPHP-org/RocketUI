@@ -22,6 +22,8 @@ class Container extends AbstractLayout
     private ?string $invalidIcon;
     private ?string $inProgressIcon;
     private ?string $direction;
+    private ?bool $collapsed;
+    private ?bool $collapsible;
     private array $fields = [];
 
     public function __construct(\DOMElement $containerNode)
@@ -35,6 +37,8 @@ class Container extends AbstractLayout
         $this->invalidIcon = $containerNode->getAttribute("invalid_icon") ?: null;
         $this->inProgressIcon = $containerNode->getAttribute("inProgress_icon") ?: null;
         $this->direction = $containerNode->getAttribute("direction") ?: null;
+        $this->collapsed = $containerNode->hasAttribute("collapsed") ? (bool) $containerNode->getAttribute("collapsed") : null;
+        $this->collapsible = $containerNode->hasAttribute("collapsible") ? (bool) $containerNode->getAttribute("collapsible") : null;
 
         foreach ($containerNode->childNodes as $child) {
             if ($child->nodeType !== XML_ELEMENT_NODE) {
@@ -119,6 +123,14 @@ class Container extends AbstractLayout
     {
         return $this->direction;
     }
+    public function isCollapsed(): ?bool
+    {
+        return $this->collapsed;
+    }
+    public function isCollapsible(): ?bool
+    {
+        return $this->collapsible;
+    }
 
     public function omitJson(mixed $data): array
     {
@@ -126,6 +138,11 @@ class Container extends AbstractLayout
             'type' => $this->getType() ?: (new \ReflectionClass($this))->getShortName(),
             'direction' => $this->getDirection(),
             'label' => $this->getLabel(),
+            'validIcon' => $this->getValidIcon(),
+            'invalidIcon' => $this->getInvalidIcon(),
+            'inProgressIcon' => $this->getInProgressIcon(),
+            'collapsed' => $this->isCollapsed(),
+            'collapsible' => $this->isCollapsible(),
             'elements' => [],
         ];
 
