@@ -37,8 +37,8 @@ class Container extends AbstractLayout
         $this->invalidIcon = $containerNode->getAttribute("invalid_icon") ?: null;
         $this->inProgressIcon = $containerNode->getAttribute("inProgress_icon") ?: null;
         $this->direction = $containerNode->getAttribute("direction") ?: null;
-        $this->collapsed = $containerNode->hasAttribute("collapsed") ? (bool) $containerNode->getAttribute("collapsed") : null;
-        $this->collapsible = $containerNode->hasAttribute("collapsible") ? (bool) $containerNode->getAttribute("collapsible") : null;
+        $this->collapsed = $containerNode->hasAttribute("collapsed") ? $containerNode->getAttribute("collapsed") == "true" : null;
+        $this->collapsible = $containerNode->hasAttribute("collapsible") ? $containerNode->getAttribute("collapsible") == "true" : null;
 
         foreach ($containerNode->childNodes as $child) {
             if ($child->nodeType !== XML_ELEMENT_NODE) {
