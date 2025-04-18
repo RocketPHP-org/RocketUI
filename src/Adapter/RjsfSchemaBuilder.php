@@ -13,6 +13,7 @@ class RjsfSchemaBuilder
     ];
 
     private array $uiSchema = [];
+    private array $formData = [];
 
     public function convert(array $json): array
     {
@@ -24,9 +25,28 @@ class RjsfSchemaBuilder
             $this->parseLayoutBlock($block['elements'] ?? [], $blockKey, $block);
         }
 
+        if (!empty($json['actions'])) {
+            $this->uiSchema['ui:submitButtonOptions'] = [
+                'norender' => false,
+                'submitText' => 'Submit'
+            ];
+            foreach ($json['actions'] as $action) {
+                if ($action['type'] === 'reset') {
+                    $this->uiSchema['ui:buttons'][] = ['type' => 'reset', 'label' => $action['label'] ?? 'Reset'];
+                }
+                if ($action['type'] === 'button') {
+                    $this->uiSchema['ui:buttons'][] = ['type' => 'button', 'label' => $action['label'] ?? 'Cancel'];
+                }
+                if ($action['type'] === 'primary') {
+                    $this->uiSchema['ui:submitButtonOptions']['submitText'] = $action['label'] ?? 'Submit';
+                }
+            }
+        }
+
         return [
             'schema' => $this->schema,
-            'uiSchema' => $this->uiSchema
+            'uiSchema' => $this->uiSchema,
+            'formData' => $this->formData
         ];
     }
 
@@ -34,8 +54,8 @@ class RjsfSchemaBuilder
     {
         $this->uiSchema[$blockKey] = ['ui:layout' => []];
 
-        // Handle container-level options
         $this->uiSchema[$blockKey]['options'] = [
+            'label' => $blockMeta['label'] ?? null,
             'collapsible' => $blockMeta['collapsible'] ?? false,
             'collapsed' => $blockMeta['collapsed'] ?? false,
             'direction' => $blockMeta['direction'] ?? 'row',
@@ -139,10 +159,26 @@ class RjsfSchemaBuilder
             $this->uiSchema[$name]['ui:enumNames'] = array_column($element['options'], 'label');
         }
 
+        if (!empty($element['min'])) {
+            $property['minimum'] = $element['min'];
+        }
+
+        if (!empty($element['max'])) {
+            $property['maximum'] = $element['max'];
+        }
+
+        if (!empty($element['step'])) {
+            $property['multipleOf'] = $element['step'];
+        }
+
         $this->schema['properties'][$name] = $property;
 
         if (!empty($element['required'])) {
             $this->schema['required'][] = $name;
+        }
+
+        if (isset($element['value']) || isset($element['default'])) {
+            $this->formData[$name] = $element['value'] ?? $element['default'];
         }
 
         $this->uiSchema[$name]['ui:disabled'] = $element['readonly'] ?? false;
@@ -155,6 +191,10 @@ class RjsfSchemaBuilder
             $this->uiSchema[$name]['ui:help'] = $element['helper'] ?? $element['descriptionLongue'];
         }
 
+        if (!empty($element['condition'])) {
+            $this->uiSchema[$name]['ui:condition'] = $element['condition'];
+        }
+
         $widget = $this->mapWidget($component);
         if ($widget) {
             $this->uiSchema[$name]['ui:widget'] = $widget;
@@ -164,9 +204,9 @@ class RjsfSchemaBuilder
     private function mapType(string $type): string
     {
         return match (strtolower($type)) {
-            'text', 'email', 'chips', 'selectbox' => 'string',
-            'date' => 'string',
-            'number' => 'number',
+            'text', 'email', 'chips', 'selectbox', 'url', 'password', 'phone', 'color', 'currency' => 'string',
+            'date', 'time', 'datetime' => 'string',
+            'number', 'range' => 'number',
             'integer' => 'integer',
             'boolean', 'checkbox' => 'boolean',
             default => 'string'
@@ -178,7 +218,14 @@ class RjsfSchemaBuilder
         return match ($component) {
             'input_email' => 'email',
             'input_text' => 'text',
+            'input_password' => 'password',
             'input_date' => 'date',
+            'input_time' => 'time',
+            'input_datetime' => 'datetime',
+            'input_phone' => 'tel',
+            'input_url' => 'uri',
+            'input_color' => 'color',
+            'input_range' => 'range',
             'select_chips', 'select_selectbox' => 'select',
             'textarea' => 'textarea',
             'status' => 'select',
@@ -191,7 +238,7 @@ class RjsfSchemaBuilder
     {
         return match (strtolower($component)) {
             'header' => 'Header',
-            'toast_info' => 'Toast',
+            'toast_info', 'toast_success', 'toast_error' => 'Toast',
             'paragraph' => 'Paragraph',
             'thumb' => 'Thumb',
             default => 'UnknownField'

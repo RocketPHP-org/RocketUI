@@ -1,0 +1,110 @@
+<RocketForm xmlns="http://rocket.com/rf-schema"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://rocket.com/rf-schema ../../src/Views/Form/XSD/schema.xsd">
+
+    <metadata>
+        <title>Complete Form Example</title>
+        <description>A comprehensive RocketForm example with all possible fields and actions.</description>
+        <version>1.0</version>
+    </metadata>
+
+    <layout type="modal">
+        <container id="main-container" label="Personal Information" direction="column">
+
+            <container id="header-container" label="test" type="card" direction="column" collapsed="false" collapsible="true">
+                <header label="Complete Form Example" visible="true" />
+                <thumb id="user-thumb" label="User Agreement" name="agreement" />
+                <toast id="info-toast" type="info" label="Reminder" description="Fill all mandatory fields."/>
+            </container>
+
+            <container id="fields-container">
+                <p label="Intro" text="Please fill in your details below." condition="(true)" />
+                <textarea id="bio" label="Biography" required="true" placeholder="Tell us about yourself"/>
+
+                <!-- Text -->
+                <input name="username" type="text" label="Username" required="true" placeholder="Username" icon="FaUser" icon_position="left" helper="Enter your desired username" />
+                <!-- Email -->
+                <input name="email" type="email" label="Email" required="true" placeholder="Email Address" />
+                <!-- Password -->
+                <input name="password" type="password" label="Password" required="true" placeholder="Enter password" />
+                <!-- Number -->
+                <input name="age"
+                       type="number"
+                       label="Age"
+                       placeholder="Your age"
+                       min="10"
+                       max="100"
+                />
+                <!-- Currency -->
+                <input name="price" type="currency" label="Price" placeholder="Amount" currency="EUR" locale="fr-FR" />
+                <!-- Date -->
+                <input name="birthdate" type="date" label="Birth Date" format="yyyy-mm-dd" />
+                <!-- Time -->
+                <input name="appointment-time" type="time" label="Appointment Time" format="HH:mm:ss" />
+                <!-- Datetime -->
+                <input name="event-datetime" type="datetime" label="Event Datetime" format="yyyy-mm-dd HH:mm:ss" />
+                <!-- Checkbox -->
+                <input name="newsletter" type="checkbox" label="Subscribe to newsletter" label_position="left" />
+                <!-- Radio -->
+                <select name="gender" type="radio" label="Male" value="male" />
+                <!-- Color -->
+                <input name="favorite-color" type="color" label="Favorite Color" value="#FFFFFF"/>
+                <!-- Phone -->
+                <input name="phone" type="phone" label="Phone Number" placeholder="Enter phone number" />
+                <!-- URL -->
+                <input name="website" type="url" label="Website" placeholder="Enter URL" />
+                <!-- Slider (range) -->
+                <input name="rating" type="range" label="Rating" min="0" max="10" step="1" />
+                <!-- Hidden -->
+                <input name="userId" type="hidden" value="123456" />
+                <!-- Empty -->
+                <input name="empty-field" type="empty" label="" />
+
+                <triggerUseCase name="ValidateData" method="validateForm()">
+                    <param name="validate" value="true"/>
+                </triggerUseCase>
+
+                <file id="upload-doc" label="Upload Document" required="true" multiple="false" maxSize="5000000" />
+                <status name="user-status" label="Account Status" required="true" value="active"/>
+
+                <select name="roles" label="User Roles" type="chips" multi="true">
+                    <option label="Admin" value="admin"/>
+                    <option label="User" value="user"/>
+                </select>
+
+                <select name="country" label="Country" type="selectBox" remote="/api/countries" labelField="name" valueField="code">
+                    <filter field="region" value="EU" />
+                </select>
+
+                <container id="job-container" label="Job Information" direction="column">
+                    <input id="job-title" type="text" label="Job Title" placeholder="Job Title"/>
+                    <input id="company-name" type="text" label="Company" placeholder="Company Name"/>
+                </container>
+
+                <tabs id="additional-info-tabs" label="Additional Info">
+                    <container id="address-details" label="Address Details" direction="row">
+                        <input id="street" type="text" label="Street" placeholder="Street Name"/>
+                    </container>
+                    <container id="location-details" label="Location Details" direction="column">
+                        <input id="city" type="text" label="City" placeholder="City"/>
+                        <input id="zip-code" type="text" label="Zip Code" placeholder="Postal Code"/>
+                    </container>
+                    <container id="location-details" label="Location Details" direction="column">
+                        <toast id="success-toast" type="success" label="Success" description="Form successfully submitted!"/>
+                        <toast id="error-toast" type="error" label="Error" description="Error while submitting form."/>
+                    </container>
+                </tabs>
+
+            </container>
+
+        </container>
+
+    </layout>
+
+    <actions>
+        <button name="submit" type="primary" label="Submit" id="submit-btn" confirm="Are you sure you want to submit?"/>
+        <button name="reset" type="reset" label="Reset" id="reset-btn"/>
+        <button name="cancel" type="button" label="Cancel" id="cancel-btn"/>
+    </actions>
+
+</RocketForm>

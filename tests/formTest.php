@@ -144,7 +144,7 @@ class FormTest extends TestCase
      */
     public function testRJSFBuild()
     {
-        $form = new Form(__DIR__ . '/data/form.xml');
+        $form = new Form(__DIR__ . '/data/category.xml');
 
         $engine = new UIEngine();
         $json = $engine->buildRJSFSchema($form, new EmptyFormTestInstance());

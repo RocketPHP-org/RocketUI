@@ -1,61 +1,111 @@
 {
     "schema": {
         "type": "object",
-        "title": "Test Form",
-        "description": "Test Description",
+        "title": "Complete Form Example",
+        "description": "A comprehensive RocketForm example with all possible fields and actions.",
         "properties": {
-            "name": {
+            "bio": {
                 "type": "string",
-                "title": "Name"
+                "title": "Biography"
             },
-            "address.street": {
+            "username": {
                 "type": "string",
-                "title": "address"
+                "title": "Username"
             },
             "email": {
                 "type": "string",
                 "title": "Email"
+            },
+            "password": {
+                "type": "string",
+                "title": "Password"
+            },
+            "age": {
+                "type": "number",
+                "title": "Age",
+                "minimum": "10",
+                "maximum": "100"
+            },
+            "price": {
+                "type": "string",
+                "title": "Price"
             },
             "birthdate": {
                 "type": "string",
                 "title": "Birth Date",
                 "format": "yyyy-mm-dd"
             },
-            "file": {
+            "appointment-time": {
                 "type": "string",
-                "title": "File"
+                "title": "Appointment Time",
+                "format": "HH:mm:ss"
             },
-            "status": {
+            "event-datetime": {
                 "type": "string",
-                "title": "Status"
+                "title": "Event Datetime",
+                "format": "yyyy-mm-dd HH:mm:ss"
             },
-            "address": {
+            "newsletter": {
+                "type": "boolean",
+                "title": "Subscribe to newsletter"
+            },
+            "gender": {
                 "type": "string",
-                "title": "Select"
+                "title": "Male"
             },
-            "user": {
+            "favorite-color": {
+                "type": "string",
+                "title": "Favorite Color"
+            },
+            "phone": {
+                "type": "string",
+                "title": "Phone Number"
+            },
+            "website": {
+                "type": "string",
+                "title": "Website"
+            },
+            "rating": {
+                "type": "number",
+                "title": "Rating",
+                "maximum": "10"
+            },
+            "userId": {
+                "type": "string",
+                "title": "UserId"
+            },
+            "empty-field": {
+                "type": "string",
+                "title": "Empty-field"
+            },
+            "upload-doc": {
+                "type": "string",
+                "title": "Upload Document"
+            },
+            "user-status": {
+                "type": "string",
+                "title": "Account Status"
+            },
+            "roles": {
                 "type": "array",
-                "title": "User",
-                "items": {
-                    "type": "string"
-                }
-            },
-            "country": {
-                "type": "array",
-                "title": "Country",
+                "title": "User Roles",
                 "items": {
                     "type": "string"
                 },
                 "enum": [
-                    "FR",
-                    "ES"
+                    "admin",
+                    "user"
                 ]
+            },
+            "country": {
+                "type": "string",
+                "title": "Country"
             },
             "job-title": {
                 "type": "string",
                 "title": "Job Title"
             },
-            "company": {
+            "company-name": {
                 "type": "string",
                 "title": "Company"
             },
@@ -67,29 +117,48 @@
                 "type": "string",
                 "title": "City"
             },
-            "zip": {
+            "zip-code": {
                 "type": "string",
-                "title": "Zip"
+                "title": "Zip Code"
             },
-            "select": {
+            "success-toast": {
                 "type": "string",
-                "title": "Select"
+                "title": "Success"
+            },
+            "error-toast": {
+                "type": "string",
+                "title": "Error"
             }
         },
         "required": [
-            "name",
+            "bio",
+            "username",
             "email",
-            "file",
-            "status"
+            "password",
+            "upload-doc",
+            "user-status"
         ]
     },
     "uiSchema": {
         "main-container": {
+            "ui:layout": [],
+            "options": {
+                "label": "Personal Information",
+                "collapsible": false,
+                "collapsed": false,
+                "direction": "column",
+                "condition": null,
+                "validIcon": null,
+                "invalidIcon": null,
+                "inProgressIcon": null
+            }
+        },
+        "header-container": {
             "ui:layout": [
                 {
                     "ui:field": "Header",
                     "options": {
-                        "label": null,
+                        "label": "Complete Form Example",
                         "description": null,
                         "type": "header"
                     }
@@ -97,7 +166,7 @@
                 {
                     "ui:field": "Thumb",
                     "options": {
-                        "label": "Thumb",
+                        "label": "User Agreement",
                         "description": null,
                         "type": null
                     }
@@ -105,26 +174,40 @@
                 {
                     "ui:field": "Toast",
                     "options": {
-                        "label": "Important",
-                        "description": "Please fill all required fields",
+                        "label": "Reminder",
+                        "description": "Fill all mandatory fields.",
                         "type": "info"
                     }
-                },
+                }
+            ],
+            "options": {
+                "label": "test",
+                "collapsible": true,
+                "collapsed": false,
+                "direction": "column",
+                "condition": null,
+                "validIcon": null,
+                "invalidIcon": null,
+                "inProgressIcon": null
+            }
+        },
+        "fields-container": {
+            "ui:layout": [
                 {
                     "ui:field": "Paragraph",
                     "options": {
-                        "label": null,
-                        "description": "description",
+                        "label": "Intro",
+                        "description": "Please fill in your details below.",
                         "type": null
                     }
                 },
                 {
-                    "name": {
+                    "bio": {
                         "md": 12
                     }
                 },
                 {
-                    "address.street": {
+                    "username": {
                         "md": 12
                     }
                 },
@@ -134,42 +217,97 @@
                     }
                 },
                 {
-                    "birthdate": {
+                    "password": {
+                        "md": 12
+                    }
+                },
+                {
+                    "age": {
+                        "md": 12
+                    }
+                },
+                {
+                    "price": {
                         "md": 12
                     }
                 },
                 {
                     "birthdate": {
+                        "md": 12
+                    }
+                },
+                {
+                    "appointment-time": {
+                        "md": 12
+                    }
+                },
+                {
+                    "event-datetime": {
+                        "md": 12
+                    }
+                },
+                {
+                    "newsletter": {
+                        "md": 12
+                    }
+                },
+                {
+                    "gender": {
+                        "md": 12
+                    }
+                },
+                {
+                    "favorite-color": {
+                        "md": 12
+                    }
+                },
+                {
+                    "phone": {
+                        "md": 12
+                    }
+                },
+                {
+                    "website": {
+                        "md": 12
+                    }
+                },
+                {
+                    "rating": {
+                        "md": 12
+                    }
+                },
+                {
+                    "userId": {
+                        "md": 12
+                    }
+                },
+                {
+                    "empty-field": {
                         "md": 12
                     }
                 },
                 {
                     "ui:field": "UseCase",
-                    "name": "Check",
+                    "name": "ValidateData",
                     "options": {
-                        "method": "check_insi()",
+                        "method": "validateForm()",
                         "params": {
-                            "param1": "value1"
+                            "validate": "true"
                         }
                     }
                 },
                 {
-                    "file": {
+                    "upload-doc": {
                         "md": 12
                     }
                 },
                 {
-                    "status": {
+                    "user-status": {
                         "md": 12
                     }
                 },
                 {
-                    "address": {
-                        "md": 12
-                    }
-                },
-                {
-                    "user": {
+                    "roles": {
                         "md": 12
                     }
                 },
@@ -179,17 +317,33 @@
                     }
                 },
                 {
-                    "select": {
-                        "md": 12
-                    }
-                },
-                {
-                    "select": {
-                        "md": 12
-                    }
+                    "ui:field": "Tabs",
+                    "tabs": [
+                        {
+                            "name": "Address Details",
+                            "fields": [
+                                "street"
+                            ]
+                        },
+                        {
+                            "name": "Location Details",
+                            "fields": [
+                                "city",
+                                "zip-code"
+                            ]
+                        },
+                        {
+                            "name": "Location Details",
+                            "fields": [
+                                "success-toast",
+                                "error-toast"
+                            ]
+                        }
+                    ]
                 }
             ],
             "options": {
+                "label": null,
                 "collapsible": false,
                 "collapsed": false,
                 "direction": "row",
@@ -199,49 +353,98 @@
                 "inProgressIcon": null
             }
         },
-        "name": {
+        "bio": {
             "ui:disabled": false,
-            "ui:placeholder": "Enter your name",
-            "ui:widget": "text"
+            "ui:placeholder": "Tell us about yourself",
+            "ui:widget": "textarea"
         },
-        "address.street": {
+        "username": {
             "ui:disabled": false,
+            "ui:placeholder": "Username",
+            "ui:help": "Enter your desired username",
             "ui:widget": "text"
         },
         "email": {
             "ui:disabled": false,
-            "ui:placeholder": "Enter your email",
+            "ui:placeholder": "Email Address",
             "ui:widget": "email"
+        },
+        "password": {
+            "ui:disabled": false,
+            "ui:placeholder": "Enter password",
+            "ui:widget": "password"
+        },
+        "age": {
+            "ui:disabled": false,
+            "ui:placeholder": "Your age"
+        },
+        "price": {
+            "ui:disabled": false,
+            "ui:placeholder": "Amount"
         },
         "birthdate": {
             "ui:disabled": false,
             "ui:widget": "date"
         },
-        "file": {
+        "appointment-time": {
+            "ui:disabled": false,
+            "ui:widget": "time"
+        },
+        "event-datetime": {
+            "ui:disabled": false,
+            "ui:widget": "datetime"
+        },
+        "newsletter": {
+            "ui:disabled": false
+        },
+        "gender": {
+            "ui:disabled": false
+        },
+        "favorite-color": {
+            "ui:disabled": false,
+            "ui:widget": "color"
+        },
+        "phone": {
+            "ui:disabled": false,
+            "ui:placeholder": "Enter phone number",
+            "ui:widget": "tel"
+        },
+        "website": {
+            "ui:disabled": false,
+            "ui:placeholder": "Enter URL",
+            "ui:widget": "uri"
+        },
+        "rating": {
+            "ui:disabled": false,
+            "ui:widget": "range"
+        },
+        "userId": {
+            "ui:disabled": false
+        },
+        "empty-field": {
+            "ui:disabled": false
+        },
+        "upload-doc": {
             "ui:disabled": false,
             "ui:widget": "file"
         },
-        "status": {
+        "user-status": {
             "ui:disabled": false,
             "ui:widget": "select"
         },
-        "address": {
-            "ui:disabled": false,
-            "ui:widget": "select"
-        },
-        "user": {
-            "ui:widget": "select",
-            "ui:disabled": false
-        },
-        "country": {
+        "roles": {
             "ui:widget": "select",
             "ui:enumNames": [
-                "France",
-                "Spain"
+                "Admin",
+                "User"
             ],
             "ui:disabled": false
         },
-        "job-function": {
+        "country": {
+            "ui:disabled": false,
+            "ui:widget": "select"
+        },
+        "job-container": {
             "ui:layout": [
                 {
                     "job-title": {
@@ -249,25 +452,13 @@
                     }
                 },
                 {
-                    "company": {
+                    "company-name": {
                         "md": 12
                     }
-                },
-                {
-                    "ui:field": "Tabs",
-                    "tabs": [
-                        {
-                            "name": "Address",
-                            "fields": [
-                                "street",
-                                "city",
-                                "zip"
-                            ]
-                        }
-                    ]
                 }
             ],
             "options": {
+                "label": "Job Information",
                 "collapsible": false,
                 "collapsed": false,
                 "direction": "column",
@@ -279,84 +470,74 @@
         },
         "job-title": {
             "ui:disabled": false,
-            "ui:placeholder": "Enter your job title",
+            "ui:placeholder": "Job Title",
             "ui:widget": "text"
         },
-        "company": {
+        "company-name": {
             "ui:disabled": false,
-            "ui:placeholder": "Enter your company",
+            "ui:placeholder": "Company Name",
             "ui:widget": "text"
         },
-        "additional-info": {
-            "ui:layout": [],
-            "options": {
-                "collapsible": false,
-                "collapsed": false,
-                "direction": "row",
-                "condition": null,
-                "validIcon": null,
-                "invalidIcon": null,
-                "inProgressIcon": null
-            }
+        "additional-info-tabs": {
+            "ui:field": "Tabs",
+            "tabs": [
+                {
+                    "name": "Address Details",
+                    "fields": [
+                        "street"
+                    ]
+                },
+                {
+                    "name": "Location Details",
+                    "fields": [
+                        "city",
+                        "zip-code"
+                    ]
+                },
+                {
+                    "name": "Location Details",
+                    "fields": [
+                        "success-toast",
+                        "error-toast"
+                    ]
+                }
+            ]
         },
         "street": {
             "ui:disabled": false,
-            "ui:placeholder": "Enter your street",
+            "ui:placeholder": "Street Name",
             "ui:widget": "text"
         },
         "city": {
             "ui:disabled": false,
-            "ui:placeholder": "Enter your city",
+            "ui:placeholder": "City",
             "ui:widget": "text"
         },
-        "zip": {
+        "zip-code": {
             "ui:disabled": false,
-            "ui:placeholder": "Enter your zip",
+            "ui:placeholder": "Postal Code",
             "ui:widget": "text"
         },
-        "select": {
-            "ui:disabled": false,
-            "ui:widget": "select"
+        "success-toast": {
+            "ui:disabled": false
         },
-        "Address": {
-            "ui:layout": [
-                {
-                    "street": {
-                        "md": 12
-                    }
-                },
-                {
-                    "city": {
-                        "md": 12
-                    }
-                },
-                {
-                    "zip": {
-                        "md": 12
-                    }
-                }
-            ],
-            "options": {
-                "collapsible": false,
-                "collapsed": false,
-                "direction": "row",
-                "condition": null,
-                "validIcon": null,
-                "invalidIcon": null,
-                "inProgressIcon": null
-            }
+        "error-toast": {
+            "ui:disabled": false
         },
-        "info-toast": {
-            "ui:layout": [],
-            "options": {
-                "collapsible": false,
-                "collapsed": false,
-                "direction": "row",
-                "condition": null,
-                "validIcon": null,
-                "invalidIcon": null,
-                "inProgressIcon": null
+        "ui:submitButtonOptions": {
+            "norender": false,
+            "submitText": "Submit"
+        },
+        "ui:buttons": [
+            {
+                "type": "reset",
+                "label": "Reset"
+            },
+            {
+                "type": "button",
+                "label": "Cancel"
             }
-        }
-    }
+        ]
+    },
+    "formData": []
 }
