@@ -56,13 +56,33 @@ class RjsfSchemaBuilder
 
         $this->uiSchema[$blockKey]['options'] = [
             'label' => $blockMeta['label'] ?? null,
+            'type' => $blockMeta['type'] ?? null,
             'collapsible' => $blockMeta['collapsible'] ?? false,
             'collapsed' => $blockMeta['collapsed'] ?? false,
             'direction' => $blockMeta['direction'] ?? 'row',
             'condition' => $blockMeta['condition'] ?? null,
             'validIcon' => $blockMeta['validIcon'] ?? null,
             'invalidIcon' => $blockMeta['invalidIcon'] ?? null,
-            'inProgressIcon' => $blockMeta['inProgressIcon'] ?? null
+            'description' => $blockMeta['description'] ?? null,
+            'inProgressIcon' => $blockMeta['inProgressIcon'] ?? null,
+            'labelPosition' => $blockMeta['labelPosition'] ?? null,
+            'icon' => $blockMeta['icon'] ?? null,
+            'iconPosition' => $blockMeta['iconPosition'] ?? null,
+            'required' => $blockMeta['required'] ?? false,
+            'width' => $blockMeta['width'] ?? null,
+            'readonly' => $blockMeta['readonly'] ?? false,
+            'rightLabel' => $blockMeta['rightLabel'] ?? null,
+            'helperLabel' => $blockMeta['helperLabel'] ?? null,
+            'helper' => $blockMeta['helper'] ?? null,
+            'error' => $blockMeta['error'] ?? null,
+            'tooltip' => $blockMeta['tooltip'] ?? null,
+            'hideIf' => $blockMeta['hideIf'] ?? null,
+            'showIf' => $blockMeta['showIf'] ?? null,
+            'disableIf' => $blockMeta['disableIf'] ?? null,
+            'enableIf' => $blockMeta['enableIf'] ?? null,
+            'invalidIf' => $blockMeta['invalidIf'] ?? null,
+            'onChange' => $blockMeta['onChange'] ?? null,
+            'component' => $blockMeta['component'] ?? null
         ];
 
         foreach ($elements as $element) {
