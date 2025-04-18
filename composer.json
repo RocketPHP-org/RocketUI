@@ -23,11 +23,11 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/RocketPHP-org/RocketRule"
+            "url": "https://gitlab.com/rocketphp/RocketRule.git"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/RocketPHP-org/RocketGate"
+            "url": "https://gitlab.com/rocketphp/RocketGate.git"
         }
     ],
     "minimum-stability": "stable",

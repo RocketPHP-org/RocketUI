@@ -4,10 +4,6 @@
         "title": "Test Form",
         "description": "Test Description",
         "properties": {
-            "address.id": {
-                "type": "string",
-                "title": "Thumb"
-            },
             "name": {
                 "type": "string",
                 "title": "Name"
@@ -38,12 +34,18 @@
                 "title": "Select"
             },
             "user": {
-                "type": "string",
-                "title": "User"
+                "type": "array",
+                "title": "User",
+                "items": {
+                    "type": "string"
+                }
             },
             "country": {
-                "type": "string",
+                "type": "array",
                 "title": "Country",
+                "items": {
+                    "type": "string"
+                },
                 "enum": [
                     "FR",
                     "ES"
@@ -93,8 +95,11 @@
                     }
                 },
                 {
-                    "address.id": {
-                        "md": 12
+                    "ui:field": "Thumb",
+                    "options": {
+                        "label": "Thumb",
+                        "description": null,
+                        "type": null
                     }
                 },
                 {
@@ -183,10 +188,16 @@
                         "md": 12
                     }
                 }
-            ]
-        },
-        "address.id": {
-            "ui:disabled": false
+            ],
+            "options": {
+                "collapsible": false,
+                "collapsed": false,
+                "direction": "row",
+                "condition": null,
+                "validIcon": null,
+                "invalidIcon": null,
+                "inProgressIcon": null
+            }
         },
         "name": {
             "ui:disabled": false,
@@ -219,16 +230,16 @@
             "ui:widget": "select"
         },
         "user": {
-            "ui:disabled": false,
-            "ui:widget": "select"
+            "ui:widget": "select",
+            "ui:disabled": false
         },
         "country": {
+            "ui:widget": "select",
             "ui:enumNames": [
                 "France",
                 "Spain"
             ],
-            "ui:disabled": false,
-            "ui:widget": "select"
+            "ui:disabled": false
         },
         "job-function": {
             "ui:layout": [
@@ -241,8 +252,30 @@
                     "company": {
                         "md": 12
                     }
+                },
+                {
+                    "ui:field": "Tabs",
+                    "tabs": [
+                        {
+                            "name": "Address",
+                            "fields": [
+                                "street",
+                                "city",
+                                "zip"
+                            ]
+                        }
+                    ]
                 }
-            ]
+            ],
+            "options": {
+                "collapsible": false,
+                "collapsed": false,
+                "direction": "column",
+                "condition": null,
+                "validIcon": null,
+                "invalidIcon": null,
+                "inProgressIcon": null
+            }
         },
         "job-title": {
             "ui:disabled": false,
@@ -255,26 +288,16 @@
             "ui:widget": "text"
         },
         "additional-info": {
-            "ui:layout": []
-        },
-        "Address": {
-            "ui:layout": [
-                {
-                    "street": {
-                        "md": 12
-                    }
-                },
-                {
-                    "city": {
-                        "md": 12
-                    }
-                },
-                {
-                    "zip": {
-                        "md": 12
-                    }
-                }
-            ]
+            "ui:layout": [],
+            "options": {
+                "collapsible": false,
+                "collapsed": false,
+                "direction": "row",
+                "condition": null,
+                "validIcon": null,
+                "invalidIcon": null,
+                "inProgressIcon": null
+            }
         },
         "street": {
             "ui:disabled": false,
@@ -295,8 +318,45 @@
             "ui:disabled": false,
             "ui:widget": "select"
         },
+        "Address": {
+            "ui:layout": [
+                {
+                    "street": {
+                        "md": 12
+                    }
+                },
+                {
+                    "city": {
+                        "md": 12
+                    }
+                },
+                {
+                    "zip": {
+                        "md": 12
+                    }
+                }
+            ],
+            "options": {
+                "collapsible": false,
+                "collapsed": false,
+                "direction": "row",
+                "condition": null,
+                "validIcon": null,
+                "invalidIcon": null,
+                "inProgressIcon": null
+            }
+        },
         "info-toast": {
-            "ui:layout": []
+            "ui:layout": [],
+            "options": {
+                "collapsible": false,
+                "collapsed": false,
+                "direction": "row",
+                "condition": null,
+                "validIcon": null,
+                "invalidIcon": null,
+                "inProgressIcon": null
+            }
         }
     }
 }

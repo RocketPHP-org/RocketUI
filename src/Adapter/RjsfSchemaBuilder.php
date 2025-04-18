@@ -21,7 +21,7 @@ class RjsfSchemaBuilder
 
         foreach ($json['layout'] as $block) {
             $blockKey = $block['id'] ?? $block['label'] ?? uniqid('section_');
-            $this->parseLayoutBlock($block['elements'] ?? [], $blockKey);
+            $this->parseLayoutBlock($block['elements'] ?? [], $blockKey, $block);
         }
 
         return [
@@ -30,22 +30,55 @@ class RjsfSchemaBuilder
         ];
     }
 
-    private function parseLayoutBlock(array $elements, string $blockKey): void
+    private function parseLayoutBlock(array $elements, string $blockKey, array $blockMeta = []): void
     {
         $this->uiSchema[$blockKey] = ['ui:layout' => []];
 
+        // Handle container-level options
+        $this->uiSchema[$blockKey]['options'] = [
+            'collapsible' => $blockMeta['collapsible'] ?? false,
+            'collapsed' => $blockMeta['collapsed'] ?? false,
+            'direction' => $blockMeta['direction'] ?? 'row',
+            'condition' => $blockMeta['condition'] ?? null,
+            'validIcon' => $blockMeta['validIcon'] ?? null,
+            'invalidIcon' => $blockMeta['invalidIcon'] ?? null,
+            'inProgressIcon' => $blockMeta['inProgressIcon'] ?? null
+        ];
+
         foreach ($elements as $element) {
-            // Nested Containers, Tabs
+            if (isset($element['elements']) && $element['component'] === 'Tabs') {
+                $tabKey = $element['id'] ?? $element['label'] ?? uniqid('tabs_');
+                $this->uiSchema[$tabKey] = ['ui:field' => 'Tabs', 'tabs' => []];
+
+                foreach ($element['elements'] as $tab) {
+                    $tabLabel = $tab['label'] ?? 'Tab';
+                    $fields = [];
+                    foreach ($tab['elements'] ?? [] as $subElement) {
+                        $fieldName = $subElement['name'] ?? $subElement['id'] ?? null;
+                        if ($fieldName) {
+                            $this->createSchemaProperty($fieldName, $subElement, strtolower($subElement['component'] ?? ''));
+                            $fields[] = $fieldName;
+                        }
+                    }
+                    $this->uiSchema[$tabKey]['tabs'][] = [
+                        'name' => $tabLabel,
+                        'fields' => $fields
+                    ];
+                }
+                $this->uiSchema[$blockKey]['ui:layout'][] = ['ui:field' => 'Tabs', 'tabs' => $this->uiSchema[$tabKey]['tabs']];
+                continue;
+            }
+
             if (isset($element['elements'])) {
                 $subKey = $element['id'] ?? $element['label'] ?? uniqid('section_');
-                $this->parseLayoutBlock($element['elements'], $subKey);
+                $this->parseLayoutBlock($element['elements'], $subKey, $element);
                 continue;
             }
 
             $component = strtolower($element['component'] ?? '');
             $name = $element['name'] ?? $element['id'] ?? null;
 
-            if (in_array($component, ['header', 'toast_info', 'paragraph'])) {
+            if (in_array($component, ['header', 'toast_info', 'paragraph', 'thumb'])) {
                 $this->uiSchema[$blockKey]['ui:layout'][] = [
                     'ui:field' => $this->mapSpecialField($component),
                     'options' => [
@@ -73,10 +106,8 @@ class RjsfSchemaBuilder
                 continue;
             }
 
-            // Create schema property
             $this->createSchemaProperty($name, $element, $component);
 
-            // Add layout row
             $this->uiSchema[$blockKey]['ui:layout'][] = [
                 $name => ['md' => $this->mapWidth($element['width'] ?? null)]
             ];
@@ -92,6 +123,12 @@ class RjsfSchemaBuilder
             'type' => $this->mapType($type),
             'title' => $label
         ];
+
+        if (!empty($element['multi'])) {
+            $property['type'] = 'array';
+            $property['items'] = ['type' => 'string'];
+            $this->uiSchema[$name]['ui:widget'] = 'checkboxes';
+        }
 
         if (isset($element['format'])) {
             $property['format'] = $element['format'];
@@ -112,6 +149,10 @@ class RjsfSchemaBuilder
 
         if (!empty($element['placeholder'])) {
             $this->uiSchema[$name]['ui:placeholder'] = $element['placeholder'];
+        }
+
+        if (!empty($element['helper']) || !empty($element['descriptionLongue'])) {
+            $this->uiSchema[$name]['ui:help'] = $element['helper'] ?? $element['descriptionLongue'];
         }
 
         $widget = $this->mapWidget($component);
@@ -152,6 +193,7 @@ class RjsfSchemaBuilder
             'header' => 'Header',
             'toast_info' => 'Toast',
             'paragraph' => 'Paragraph',
+            'thumb' => 'Thumb',
             default => 'UnknownField'
         };
     }
