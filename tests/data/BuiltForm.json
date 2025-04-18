@@ -11,8 +11,8 @@
             "label": "Personal Information",
             "required": false,
             "readonly": false,
-            "component": "Container",
-            "type": "Container",
+            "component": "Container_card",
+            "type": "card",
             "direction": "row",
             "elements": [
                 {
@@ -37,7 +37,9 @@
                     "label": "Important",
                     "required": false,
                     "readonly": false,
-                    "component": "Toast"
+                    "component": "Toast_info",
+                    "type": "info",
+                    "description": "Please fill all required fields"
                 },
                 {
                     "required": false,
@@ -60,9 +62,8 @@
                     "required": true,
                     "placeholder": "Enter your name",
                     "readonly": false,
-                    "value": "John Doe",
                     "default": "John Dooe",
-                    "component": "Input",
+                    "component": "Input_text",
                     "type": "text"
                 },
                 {
@@ -71,7 +72,7 @@
                     "required": false,
                     "readonly": false,
                     "value": "123 Main St",
-                    "component": "Input",
+                    "component": "Input_text",
                     "type": "text"
                 },
                 {
@@ -80,7 +81,7 @@
                     "required": true,
                     "placeholder": "Enter your email",
                     "readonly": false,
-                    "component": "Input",
+                    "component": "Input_email",
                     "type": "email"
                 },
                 {
@@ -88,7 +89,7 @@
                     "label": "Birth Date",
                     "required": false,
                     "readonly": false,
-                    "component": "Input",
+                    "component": "Input_date",
                     "type": "date",
                     "format": "yyyy-mm-dd"
                 },
@@ -97,7 +98,7 @@
                     "label": "Birth Date",
                     "required": false,
                     "readonly": false,
-                    "component": "Input",
+                    "component": "Input_empty",
                     "type": "empty",
                     "format": "yyyy-mm-dd"
                 },
@@ -142,7 +143,7 @@
                     "required": false,
                     "readonly": false,
                     "csCondition": "true",
-                    "component": "Select",
+                    "component": "Select_chips",
                     "type": "chips",
                     "multi": false
                 },
@@ -150,7 +151,7 @@
                     "name": "user",
                     "required": false,
                     "readonly": false,
-                    "component": "Select",
+                    "component": "Select_selectBox",
                     "type": "selectBox",
                     "remote": "/api/users",
                     "valueField": "id",
@@ -166,7 +167,7 @@
                     "name": "country",
                     "required": false,
                     "readonly": false,
-                    "component": "Select",
+                    "component": "Select_chips",
                     "type": "chips",
                     "multi": true,
                     "options": [
@@ -195,7 +196,7 @@
                             "required": false,
                             "placeholder": "Enter your job title",
                             "readonly": false,
-                            "component": "Input",
+                            "component": "Input_text",
                             "type": "text"
                         },
                         {
@@ -204,7 +205,7 @@
                             "required": false,
                             "placeholder": "Enter your company",
                             "readonly": false,
-                            "component": "Input",
+                            "component": "Input_text",
                             "type": "text"
                         },
                         {
@@ -218,6 +219,12 @@
                                 {
                                     "type": "Container",
                                     "direction": null,
+                                    "label": "Address",
+                                    "validIcon": null,
+                                    "invalidIcon": null,
+                                    "inProgressIcon": null,
+                                    "collapsed": null,
+                                    "collapsible": null,
                                     "elements": [
                                         {
                                             "id": "street",
@@ -225,7 +232,7 @@
                                             "required": false,
                                             "placeholder": "Enter your street",
                                             "readonly": false,
-                                            "component": "Input",
+                                            "component": "Input_text",
                                             "type": "text"
                                         },
                                         {
@@ -234,7 +241,7 @@
                                             "required": false,
                                             "placeholder": "Enter your city",
                                             "readonly": false,
-                                            "component": "Input",
+                                            "component": "Input_text",
                                             "type": "text"
                                         },
                                         {
@@ -243,7 +250,7 @@
                                             "required": false,
                                             "placeholder": "Enter your zip",
                                             "readonly": false,
-                                            "component": "Input",
+                                            "component": "Input_text",
                                             "type": "text"
                                         }
                                     ]
@@ -258,7 +265,7 @@
                     "required": false,
                     "readonly": false,
                     "csCondition": "true",
-                    "component": "Select",
+                    "component": "Select_chips",
                     "type": "chips",
                     "multi": false
                 },
@@ -268,7 +275,7 @@
                     "required": false,
                     "readonly": false,
                     "csCondition": "true",
-                    "component": "Select",
+                    "component": "Select_chips",
                     "type": "chips",
                     "multi": false
                 }
@@ -285,6 +292,12 @@
                 {
                     "type": "Container",
                     "direction": null,
+                    "label": "Address",
+                    "validIcon": null,
+                    "invalidIcon": null,
+                    "inProgressIcon": null,
+                    "collapsed": null,
+                    "collapsible": null,
                     "elements": [
                         {
                             "id": "street",
@@ -292,7 +305,7 @@
                             "required": false,
                             "placeholder": "Enter your street",
                             "readonly": false,
-                            "component": "Input",
+                            "component": "Input_text",
                             "type": "text"
                         },
                         {
@@ -301,7 +314,7 @@
                             "required": false,
                             "placeholder": "Enter your city",
                             "readonly": false,
-                            "component": "Input",
+                            "component": "Input_text",
                             "type": "text"
                         },
                         {
@@ -310,7 +323,7 @@
                             "required": false,
                             "placeholder": "Enter your zip",
                             "readonly": false,
-                            "component": "Input",
+                            "component": "Input_text",
                             "type": "text"
                         }
                     ]
@@ -322,7 +335,9 @@
             "label": "Important",
             "required": false,
             "readonly": false,
-            "component": "Toast"
+            "component": "Toast_info",
+            "type": "info",
+            "description": "Please fill all required fields"
         }
     ],
     "actions": [
@@ -332,7 +347,7 @@
             "label": "Submit",
             "required": false,
             "readonly": false,
-            "component": "Button",
+            "component": "Button_primary",
             "type": "primary",
             "confirm": "Are you sure?"
         },
@@ -341,7 +356,7 @@
             "label": "Reset",
             "required": false,
             "readonly": false,
-            "component": "Button",
+            "component": "Button_reset",
             "type": "reset"
         }
     ]

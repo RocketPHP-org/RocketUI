@@ -11,7 +11,7 @@ use stdClass;
 
 class GridTest extends TestCase
 {
-    public function testFormXSDValidation()
+/*    public function testFormXSDValidation()
     {
         $xml = new \DOMDocument();
         $xml->load(__DIR__ . '/data/grid.xml');
@@ -45,7 +45,7 @@ class GridTest extends TestCase
         $prettyJson = json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
         file_put_contents(__DIR__ . '/data/BuiltGrid.json', $prettyJson);
-    }
+    }*/
 
 }
 

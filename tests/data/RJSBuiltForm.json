@@ -1,0 +1,302 @@
+{
+    "schema": {
+        "type": "object",
+        "title": "Test Form",
+        "description": "Test Description",
+        "properties": {
+            "address.id": {
+                "type": "string",
+                "title": "Thumb"
+            },
+            "name": {
+                "type": "string",
+                "title": "Name"
+            },
+            "address.street": {
+                "type": "string",
+                "title": "address"
+            },
+            "email": {
+                "type": "string",
+                "title": "Email"
+            },
+            "birthdate": {
+                "type": "string",
+                "title": "Birth Date",
+                "format": "yyyy-mm-dd"
+            },
+            "file": {
+                "type": "string",
+                "title": "File"
+            },
+            "status": {
+                "type": "string",
+                "title": "Status"
+            },
+            "address": {
+                "type": "string",
+                "title": "Select"
+            },
+            "user": {
+                "type": "string",
+                "title": "User"
+            },
+            "country": {
+                "type": "string",
+                "title": "Country",
+                "enum": [
+                    "FR",
+                    "ES"
+                ]
+            },
+            "job-title": {
+                "type": "string",
+                "title": "Job Title"
+            },
+            "company": {
+                "type": "string",
+                "title": "Company"
+            },
+            "street": {
+                "type": "string",
+                "title": "Street"
+            },
+            "city": {
+                "type": "string",
+                "title": "City"
+            },
+            "zip": {
+                "type": "string",
+                "title": "Zip"
+            },
+            "select": {
+                "type": "string",
+                "title": "Select"
+            }
+        },
+        "required": [
+            "name",
+            "email",
+            "file",
+            "status"
+        ]
+    },
+    "uiSchema": {
+        "main-container": {
+            "ui:layout": [
+                {
+                    "ui:field": "Header",
+                    "options": {
+                        "label": null,
+                        "description": null,
+                        "type": "header"
+                    }
+                },
+                {
+                    "address.id": {
+                        "md": 12
+                    }
+                },
+                {
+                    "ui:field": "Toast",
+                    "options": {
+                        "label": "Important",
+                        "description": "Please fill all required fields",
+                        "type": "info"
+                    }
+                },
+                {
+                    "ui:field": "Paragraph",
+                    "options": {
+                        "label": null,
+                        "description": "description",
+                        "type": null
+                    }
+                },
+                {
+                    "name": {
+                        "md": 12
+                    }
+                },
+                {
+                    "address.street": {
+                        "md": 12
+                    }
+                },
+                {
+                    "email": {
+                        "md": 12
+                    }
+                },
+                {
+                    "birthdate": {
+                        "md": 12
+                    }
+                },
+                {
+                    "birthdate": {
+                        "md": 12
+                    }
+                },
+                {
+                    "ui:field": "UseCase",
+                    "name": "Check",
+                    "options": {
+                        "method": "check_insi()",
+                        "params": {
+                            "param1": "value1"
+                        }
+                    }
+                },
+                {
+                    "file": {
+                        "md": 12
+                    }
+                },
+                {
+                    "status": {
+                        "md": 12
+                    }
+                },
+                {
+                    "address": {
+                        "md": 12
+                    }
+                },
+                {
+                    "user": {
+                        "md": 12
+                    }
+                },
+                {
+                    "country": {
+                        "md": 12
+                    }
+                },
+                {
+                    "select": {
+                        "md": 12
+                    }
+                },
+                {
+                    "select": {
+                        "md": 12
+                    }
+                }
+            ]
+        },
+        "address.id": {
+            "ui:disabled": false
+        },
+        "name": {
+            "ui:disabled": false,
+            "ui:placeholder": "Enter your name",
+            "ui:widget": "text"
+        },
+        "address.street": {
+            "ui:disabled": false,
+            "ui:widget": "text"
+        },
+        "email": {
+            "ui:disabled": false,
+            "ui:placeholder": "Enter your email",
+            "ui:widget": "email"
+        },
+        "birthdate": {
+            "ui:disabled": false,
+            "ui:widget": "date"
+        },
+        "file": {
+            "ui:disabled": false,
+            "ui:widget": "file"
+        },
+        "status": {
+            "ui:disabled": false,
+            "ui:widget": "select"
+        },
+        "address": {
+            "ui:disabled": false,
+            "ui:widget": "select"
+        },
+        "user": {
+            "ui:disabled": false,
+            "ui:widget": "select"
+        },
+        "country": {
+            "ui:enumNames": [
+                "France",
+                "Spain"
+            ],
+            "ui:disabled": false,
+            "ui:widget": "select"
+        },
+        "job-function": {
+            "ui:layout": [
+                {
+                    "job-title": {
+                        "md": 12
+                    }
+                },
+                {
+                    "company": {
+                        "md": 12
+                    }
+                }
+            ]
+        },
+        "job-title": {
+            "ui:disabled": false,
+            "ui:placeholder": "Enter your job title",
+            "ui:widget": "text"
+        },
+        "company": {
+            "ui:disabled": false,
+            "ui:placeholder": "Enter your company",
+            "ui:widget": "text"
+        },
+        "additional-info": {
+            "ui:layout": []
+        },
+        "Address": {
+            "ui:layout": [
+                {
+                    "street": {
+                        "md": 12
+                    }
+                },
+                {
+                    "city": {
+                        "md": 12
+                    }
+                },
+                {
+                    "zip": {
+                        "md": 12
+                    }
+                }
+            ]
+        },
+        "street": {
+            "ui:disabled": false,
+            "ui:placeholder": "Enter your street",
+            "ui:widget": "text"
+        },
+        "city": {
+            "ui:disabled": false,
+            "ui:placeholder": "Enter your city",
+            "ui:widget": "text"
+        },
+        "zip": {
+            "ui:disabled": false,
+            "ui:placeholder": "Enter your zip",
+            "ui:widget": "text"
+        },
+        "select": {
+            "ui:disabled": false,
+            "ui:widget": "select"
+        },
+        "info-toast": {
+            "ui:layout": []
+        }
+    }
+}

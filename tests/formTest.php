@@ -139,7 +139,19 @@ class FormTest extends TestCase
         file_put_contents(__DIR__ . '/data/BuiltForm.json', $prettyJson);
     }
 
+    /**
+     * @throws \Exception
+     */
+    public function testRJSFBuild()
+    {
+        $form = new Form(__DIR__ . '/data/form.xml');
 
+        $engine = new UIEngine();
+        $json = $engine->buildRJSFSchema($form, new EmptyFormTestInstance());
+
+
+        file_put_contents(__DIR__ . '/data/RJSBuiltForm.json', $json);
+    }
 }
 
 
