@@ -54,6 +54,8 @@ class RjsfSchemaBuilder
     {
         $this->uiSchema[$blockKey] = ['ui:layout' => []];
 
+        $this->uiSchema[$blockKey]['ui:field'] = 'Container';
+
         $this->uiSchema[$blockKey]['options'] = [
             'label' => $blockMeta['label'] ?? null,
             'type' => $blockMeta['type'] ?? null,
