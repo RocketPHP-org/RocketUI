@@ -4,130 +4,149 @@
         "title": "Complete Form Example",
         "description": "A comprehensive RocketForm example with all possible fields and actions.",
         "properties": {
-            "bio": {
-                "type": "string",
-                "title": "Biography"
-            },
-            "username": {
-                "type": "string",
-                "title": "Username"
-            },
-            "email": {
-                "type": "string",
-                "title": "Email"
-            },
-            "password": {
-                "type": "string",
-                "title": "Password"
-            },
-            "age": {
-                "type": "number",
-                "title": "Age",
-                "minimum": "10",
-                "maximum": "100"
-            },
-            "price": {
-                "type": "string",
-                "title": "Price"
-            },
-            "birthdate": {
-                "type": "string",
-                "title": "Birth Date",
-                "format": "yyyy-mm-dd"
-            },
-            "appointment-time": {
-                "type": "string",
-                "title": "Appointment Time",
-                "format": "HH:mm:ss"
-            },
-            "event-datetime": {
-                "type": "string",
-                "title": "Event Datetime",
-                "format": "yyyy-mm-dd HH:mm:ss"
-            },
-            "newsletter": {
-                "type": "boolean",
-                "title": "Subscribe to newsletter"
-            },
-            "gender": {
-                "type": "string",
-                "title": "Male"
-            },
-            "favorite-color": {
-                "type": "string",
-                "title": "Favorite Color"
-            },
-            "phone": {
-                "type": "string",
-                "title": "Phone Number"
-            },
-            "website": {
-                "type": "string",
-                "title": "Website"
-            },
-            "rating": {
-                "type": "number",
-                "title": "Rating",
-                "maximum": "10"
-            },
-            "userId": {
-                "type": "string",
-                "title": "UserId"
-            },
-            "empty-field": {
-                "type": "string",
-                "title": "Empty-field"
-            },
-            "upload-doc": {
-                "type": "string",
-                "title": "Upload Document"
-            },
-            "user-status": {
-                "type": "string",
-                "title": "Account Status"
-            },
-            "roles": {
-                "type": "array",
-                "title": "User Roles",
-                "items": {
-                    "type": "string"
-                },
-                "enum": [
-                    "admin",
-                    "user"
-                ]
-            },
-            "country": {
-                "type": "string",
-                "title": "Country"
-            },
-            "job-title": {
-                "type": "string",
-                "title": "Job Title"
-            },
-            "company-name": {
-                "type": "string",
-                "title": "Company"
-            },
-            "street": {
-                "type": "string",
-                "title": "Street"
-            },
-            "city": {
-                "type": "string",
-                "title": "City"
-            },
-            "zip-code": {
-                "type": "string",
-                "title": "Zip Code"
-            },
-            "success-toast": {
-                "type": "string",
-                "title": "Success"
-            },
-            "error-toast": {
-                "type": "string",
-                "title": "Error"
+            "main-container": {
+                "type": "object",
+                "properties": {
+                    "header-container": {
+                        "type": "object",
+                        "properties": []
+                    },
+                    "fields-container": {
+                        "type": "object",
+                        "properties": {
+                            "bio": {
+                                "type": "string",
+                                "title": "Biography"
+                            },
+                            "username": {
+                                "type": "string",
+                                "title": "Username"
+                            },
+                            "email": {
+                                "type": "string",
+                                "title": "Email"
+                            },
+                            "password": {
+                                "type": "string",
+                                "title": "Password"
+                            },
+                            "age": {
+                                "type": "number",
+                                "title": "Age",
+                                "minimum": "10",
+                                "maximum": "100"
+                            },
+                            "price": {
+                                "type": "string",
+                                "title": "Price"
+                            },
+                            "birthdate": {
+                                "type": "string",
+                                "title": "Birth Date",
+                                "format": "yyyy-mm-dd"
+                            },
+                            "appointment-time": {
+                                "type": "string",
+                                "title": "Appointment Time",
+                                "format": "HH:mm:ss"
+                            },
+                            "event-datetime": {
+                                "type": "string",
+                                "title": "Event Datetime",
+                                "format": "yyyy-mm-dd HH:mm:ss"
+                            },
+                            "newsletter": {
+                                "type": "boolean",
+                                "title": "Subscribe to newsletter"
+                            },
+                            "gender": {
+                                "type": "string",
+                                "title": "Male"
+                            },
+                            "favorite-color": {
+                                "type": "string",
+                                "title": "Favorite Color"
+                            },
+                            "phone": {
+                                "type": "string",
+                                "title": "Phone Number"
+                            },
+                            "website": {
+                                "type": "string",
+                                "title": "Website"
+                            },
+                            "rating": {
+                                "type": "number",
+                                "title": "Rating",
+                                "maximum": "10"
+                            },
+                            "userId": {
+                                "type": "string",
+                                "title": "UserId"
+                            },
+                            "empty-field": {
+                                "type": "string",
+                                "title": "Empty-field"
+                            },
+                            "upload-doc": {
+                                "type": "string",
+                                "title": "Upload Document"
+                            },
+                            "user-status": {
+                                "type": "string",
+                                "title": "Account Status"
+                            },
+                            "roles": {
+                                "type": "array",
+                                "title": "User Roles",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "enum": [
+                                    "admin",
+                                    "user"
+                                ]
+                            },
+                            "country": {
+                                "type": "string",
+                                "title": "Country"
+                            },
+                            "job-container": {
+                                "type": "object",
+                                "properties": {
+                                    "job-title": {
+                                        "type": "string",
+                                        "title": "Job Title"
+                                    },
+                                    "company-name": {
+                                        "type": "string",
+                                        "title": "Company"
+                                    }
+                                }
+                            },
+                            "street": {
+                                "type": "string",
+                                "title": "Street"
+                            },
+                            "city": {
+                                "type": "string",
+                                "title": "City"
+                            },
+                            "zip-code": {
+                                "type": "string",
+                                "title": "Zip Code"
+                            },
+                            "success-toast": {
+                                "type": "string",
+                                "title": "Success"
+                            },
+                            "error-toast": {
+                                "type": "string",
+                                "title": "Error"
+                            }
+                        }
+                    }
+                }
             }
         },
         "required": [
@@ -141,6 +160,7 @@
     },
     "uiSchema": {
         "main-container": {
+            "ui:field": "Container",
             "ui:layout": [],
             "options": {
                 "label": "Personal Information",
@@ -174,6 +194,7 @@
             }
         },
         "header-container": {
+            "ui:field": "Container",
             "ui:layout": [
                 {
                     "ui:field": "Header",
@@ -232,6 +253,7 @@
             }
         },
         "fields-container": {
+            "ui:field": "Container",
             "ui:layout": [
                 {
                     "ui:field": "Paragraph",
@@ -505,6 +527,7 @@
             "ui:widget": "select"
         },
         "job-container": {
+            "ui:field": "Container",
             "ui:layout": [
                 {
                     "job-title": {
