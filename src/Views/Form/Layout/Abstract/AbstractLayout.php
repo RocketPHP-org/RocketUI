@@ -40,8 +40,8 @@ abstract class AbstractLayout extends AbstractCommonAttributes
             'onChange' => $this->getOnChange(),
             'condition' => $this->getCondition(),
             'component' => method_exists($this, 'getType') && $this->getType()
-                ? (new \ReflectionClass($this))->getShortName().'_'.$this->getType()
-                : (new \ReflectionClass($this))->getShortName(),
+                ? lcfirst((new \ReflectionClass($this))->getShortName()) . ucfirst($this->getType())
+                : lcfirst((new \ReflectionClass($this))->getShortName()),
             ];
 
         if (method_exists($this, 'omitJson')) {
