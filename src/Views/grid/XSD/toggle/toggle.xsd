@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://rocket.com/rg-schema"
+    xmlns="http://rocket.com/rg-schema"
+    elementFormDefault="qualified">
+
+    <xs:complexType name="ToggleType">
+        <xs:sequence>
+            <xs:element name="param" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:attribute name="name" type="xs:string" use="required"/>
+                    <xs:attribute name="value" type="xs:string" use="required"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="label" type="xs:string"/>
+        <xs:attribute name="type" type="xs:string"/>
+        <xs:attribute name="icon" type="xs:string"/>
+        <xs:attribute name="icon_position" type="xs:string"/>
+        <xs:attribute name="condition" type="xs:string"/>
+    </xs:complexType>
+
+</xs:schema>
