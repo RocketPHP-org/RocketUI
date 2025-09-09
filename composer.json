@@ -1,12 +1,13 @@
 {
     "name": "rocket-php/rocket-ui",
     "type": "library",
+    "license": "MIT",
     "require": {
         "phpunit/phpunit": "^11.5",
         "spatie/phpunit-watcher": "^1.24",
         "friendsofphp/php-cs-fixer": "^3.65",
-        "rocket-php/rocket-rule": "dev-main",
-        "rocket-php/rocket-gate": "dev-main",
+        "rocket-php/rocket-rule": "*",
+        "rocket-php/rocket-gate": "*",
       "ext-dom": "*"
     },
     "autoload": {
@@ -18,16 +19,6 @@
         {
             "name": "Yanis Cherfa",
             "email": "private@email.com"
-        }
-    ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://gitlab.com/rocketphp/RocketRule.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://gitlab.com/rocketphp/RocketGate.git"
         }
     ],
     "minimum-stability": "stable",
