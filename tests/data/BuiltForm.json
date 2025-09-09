@@ -11,7 +11,7 @@
             "label": "Personal Information",
             "required": false,
             "readonly": false,
-            "component": "Container_card",
+            "component": "containerCard",
             "type": "card",
             "direction": "row",
             "elements": [
@@ -20,7 +20,7 @@
                     "width": "1/3",
                     "readonly": false,
                     "value": "Yanis",
-                    "component": "Header",
+                    "component": "header",
                     "type": "header"
                 },
                 {
@@ -30,14 +30,14 @@
                     "required": false,
                     "readonly": false,
                     "value": "100",
-                    "component": "Thumb"
+                    "component": "thumb"
                 },
                 {
                     "id": "info-toast",
                     "label": "Important",
                     "required": false,
                     "readonly": false,
-                    "component": "Toast_info",
+                    "component": "toastInfo",
                     "type": "info",
                     "description": "Please fill all required fields"
                 },
@@ -45,7 +45,7 @@
                     "required": false,
                     "readonly": false,
                     "condition": "(true)",
-                    "component": "Paragraph",
+                    "component": "paragraph",
                     "text": "description"
                 },
                 {
@@ -54,7 +54,7 @@
                     "placeholder": "Enter your description",
                     "readonly": false,
                     "value": "Yanis",
-                    "component": "Textarea"
+                    "component": "textarea"
                 },
                 {
                     "name": "name",
@@ -63,7 +63,7 @@
                     "placeholder": "Enter your name",
                     "readonly": false,
                     "default": "John Dooe",
-                    "component": "Input_text",
+                    "component": "inputText",
                     "type": "text"
                 },
                 {
@@ -72,7 +72,7 @@
                     "required": false,
                     "readonly": false,
                     "value": "123 Main St",
-                    "component": "Input_text",
+                    "component": "inputText",
                     "type": "text"
                 },
                 {
@@ -81,7 +81,7 @@
                     "required": true,
                     "placeholder": "Enter your email",
                     "readonly": false,
-                    "component": "Input_email",
+                    "component": "inputEmail",
                     "type": "email"
                 },
                 {
@@ -89,7 +89,7 @@
                     "label": "Birth Date",
                     "required": false,
                     "readonly": false,
-                    "component": "Input_date",
+                    "component": "inputDate",
                     "type": "date",
                     "format": "yyyy-mm-dd"
                 },
@@ -98,7 +98,7 @@
                     "label": "Birth Date",
                     "required": false,
                     "readonly": false,
-                    "component": "Input_empty",
+                    "component": "inputEmpty",
                     "type": "empty",
                     "format": "yyyy-mm-dd"
                 },
@@ -106,7 +106,7 @@
                     "name": "Check",
                     "required": false,
                     "readonly": false,
-                    "component": "UseCase",
+                    "component": "useCase",
                     "method": "check_insi()",
                     "params": {
                         "param1": "value1"
@@ -117,7 +117,7 @@
                     "label": "File",
                     "required": true,
                     "readonly": false,
-                    "component": "File",
+                    "component": "file",
                     "multiple": false
                 },
                 {
@@ -125,7 +125,7 @@
                     "label": "Status",
                     "required": true,
                     "readonly": false,
-                    "component": "Status",
+                    "component": "status",
                     "transitions": {
                         "pending": [
                             "shipped",
@@ -143,7 +143,7 @@
                     "required": false,
                     "readonly": false,
                     "csCondition": "true",
-                    "component": "Select_chips",
+                    "component": "selectChips",
                     "type": "chips",
                     "multi": false
                 },
@@ -151,7 +151,7 @@
                     "name": "user",
                     "required": false,
                     "readonly": false,
-                    "component": "Select_selectBox",
+                    "component": "selectSelectBox",
                     "type": "selectBox",
                     "remote": "/api/users",
                     "valueField": "id",
@@ -167,7 +167,7 @@
                     "name": "country",
                     "required": false,
                     "readonly": false,
-                    "component": "Select_chips",
+                    "component": "selectChips",
                     "type": "chips",
                     "multi": true,
                     "options": [
@@ -186,7 +186,7 @@
                     "label": "Job Function",
                     "required": false,
                     "readonly": false,
-                    "component": "Container",
+                    "component": "container",
                     "type": "Container",
                     "direction": "column",
                     "elements": [
@@ -196,7 +196,7 @@
                             "required": false,
                             "placeholder": "Enter your job title",
                             "readonly": false,
-                            "component": "Input_text",
+                            "component": "inputText",
                             "type": "text"
                         },
                         {
@@ -205,7 +205,7 @@
                             "required": false,
                             "placeholder": "Enter your company",
                             "readonly": false,
-                            "component": "Input_text",
+                            "component": "inputText",
                             "type": "text"
                         },
                         {
@@ -213,7 +213,7 @@
                             "label": "Additional Information",
                             "required": false,
                             "readonly": false,
-                            "component": "Tabs",
+                            "component": "tabs",
                             "type": "Tabs",
                             "elements": [
                                 {
@@ -232,7 +232,7 @@
                                             "required": false,
                                             "placeholder": "Enter your street",
                                             "readonly": false,
-                                            "component": "Input_text",
+                                            "component": "inputText",
                                             "type": "text"
                                         },
                                         {
@@ -241,7 +241,7 @@
                                             "required": false,
                                             "placeholder": "Enter your city",
                                             "readonly": false,
-                                            "component": "Input_text",
+                                            "component": "inputText",
                                             "type": "text"
                                         },
                                         {
@@ -250,7 +250,7 @@
                                             "required": false,
                                             "placeholder": "Enter your zip",
                                             "readonly": false,
-                                            "component": "Input_text",
+                                            "component": "inputText",
                                             "type": "text"
                                         }
                                     ]
@@ -265,7 +265,7 @@
                     "required": false,
                     "readonly": false,
                     "csCondition": "true",
-                    "component": "Select_chips",
+                    "component": "selectChips",
                     "type": "chips",
                     "multi": false
                 },
@@ -275,7 +275,7 @@
                     "required": false,
                     "readonly": false,
                     "csCondition": "true",
-                    "component": "Select_chips",
+                    "component": "selectChips",
                     "type": "chips",
                     "multi": false
                 }
@@ -286,7 +286,7 @@
             "label": "Additional Information",
             "required": false,
             "readonly": false,
-            "component": "Tabs",
+            "component": "tabs",
             "type": "Tabs",
             "elements": [
                 {
@@ -305,7 +305,7 @@
                             "required": false,
                             "placeholder": "Enter your street",
                             "readonly": false,
-                            "component": "Input_text",
+                            "component": "inputText",
                             "type": "text"
                         },
                         {
@@ -314,7 +314,7 @@
                             "required": false,
                             "placeholder": "Enter your city",
                             "readonly": false,
-                            "component": "Input_text",
+                            "component": "inputText",
                             "type": "text"
                         },
                         {
@@ -323,7 +323,7 @@
                             "required": false,
                             "placeholder": "Enter your zip",
                             "readonly": false,
-                            "component": "Input_text",
+                            "component": "inputText",
                             "type": "text"
                         }
                     ]
@@ -335,7 +335,7 @@
             "label": "Important",
             "required": false,
             "readonly": false,
-            "component": "Toast_info",
+            "component": "toastInfo",
             "type": "info",
             "description": "Please fill all required fields"
         }
@@ -347,7 +347,7 @@
             "label": "Submit",
             "required": false,
             "readonly": false,
-            "component": "Button_primary",
+            "component": "buttonPrimary",
             "type": "primary",
             "confirm": "Are you sure?"
         },
@@ -356,7 +356,7 @@
             "label": "Reset",
             "required": false,
             "readonly": false,
-            "component": "Button_reset",
+            "component": "buttonReset",
             "type": "reset"
         }
     ]

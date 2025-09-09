@@ -9,7 +9,12 @@
                 "properties": {
                     "header-container": {
                         "type": "object",
-                        "properties": []
+                        "properties": {
+                            "info-toast": {
+                                "type": "string",
+                                "title": "Reminder"
+                            }
+                        }
                     },
                     "fields-container": {
                         "type": "object",
@@ -124,25 +129,32 @@
                                     }
                                 }
                             },
-                            "street": {
-                                "type": "string",
-                                "title": "Street"
-                            },
-                            "city": {
-                                "type": "string",
-                                "title": "City"
-                            },
-                            "zip-code": {
-                                "type": "string",
-                                "title": "Zip Code"
-                            },
-                            "success-toast": {
-                                "type": "string",
-                                "title": "Success"
-                            },
-                            "error-toast": {
-                                "type": "string",
-                                "title": "Error"
+                            "additional-info-tabs": {
+                                "type": "object",
+                                "properties": {
+                                    "Address Details": {
+                                        "type": "object",
+                                        "properties": {
+                                            "street": {
+                                                "type": "string",
+                                                "title": "Street"
+                                            }
+                                        }
+                                    },
+                                    "Location Details": {
+                                        "type": "object",
+                                        "properties": {
+                                            "success-toast": {
+                                                "type": "string",
+                                                "title": "Success"
+                                            },
+                                            "error-toast": {
+                                                "type": "string",
+                                                "title": "Error"
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -190,7 +202,7 @@
                 "enableIf": null,
                 "invalidIf": null,
                 "onChange": null,
-                "component": "Container"
+                "component": "container"
             }
         },
         "header-container": {
@@ -213,11 +225,8 @@
                     }
                 },
                 {
-                    "ui:field": "Toast",
-                    "options": {
-                        "label": "Reminder",
-                        "description": "Fill all mandatory fields.",
-                        "type": "info"
+                    "info-toast": {
+                        "md": 12
                     }
                 }
             ],
@@ -249,8 +258,11 @@
                 "enableIf": null,
                 "invalidIf": null,
                 "onChange": null,
-                "component": "Container_card"
+                "component": "containerCard"
             }
+        },
+        "info-toast": {
+            "ui:disabled": false
         },
         "fields-container": {
             "ui:field": "Container",
@@ -377,31 +389,6 @@
                     "country": {
                         "md": 12
                     }
-                },
-                {
-                    "ui:field": "Tabs",
-                    "tabs": [
-                        {
-                            "name": "Address Details",
-                            "fields": [
-                                "street"
-                            ]
-                        },
-                        {
-                            "name": "Location Details",
-                            "fields": [
-                                "city",
-                                "zip-code"
-                            ]
-                        },
-                        {
-                            "name": "Location Details",
-                            "fields": [
-                                "success-toast",
-                                "error-toast"
-                            ]
-                        }
-                    ]
                 }
             ],
             "options": {
@@ -432,7 +419,7 @@
                 "enableIf": null,
                 "invalidIf": null,
                 "onChange": null,
-                "component": "Container"
+                "component": "container"
             }
         },
         "bio": {
@@ -443,18 +430,15 @@
         "username": {
             "ui:disabled": false,
             "ui:placeholder": "Username",
-            "ui:help": "Enter your desired username",
-            "ui:widget": "text"
+            "ui:help": "Enter your desired username"
         },
         "email": {
             "ui:disabled": false,
-            "ui:placeholder": "Email Address",
-            "ui:widget": "email"
+            "ui:placeholder": "Email Address"
         },
         "password": {
             "ui:disabled": false,
-            "ui:placeholder": "Enter password",
-            "ui:widget": "password"
+            "ui:placeholder": "Enter password"
         },
         "age": {
             "ui:disabled": false,
@@ -465,16 +449,13 @@
             "ui:placeholder": "Amount"
         },
         "birthdate": {
-            "ui:disabled": false,
-            "ui:widget": "date"
+            "ui:disabled": false
         },
         "appointment-time": {
-            "ui:disabled": false,
-            "ui:widget": "time"
+            "ui:disabled": false
         },
         "event-datetime": {
-            "ui:disabled": false,
-            "ui:widget": "datetime"
+            "ui:disabled": false
         },
         "newsletter": {
             "ui:disabled": false
@@ -483,22 +464,18 @@
             "ui:disabled": false
         },
         "favorite-color": {
-            "ui:disabled": false,
-            "ui:widget": "color"
+            "ui:disabled": false
         },
         "phone": {
             "ui:disabled": false,
-            "ui:placeholder": "Enter phone number",
-            "ui:widget": "tel"
+            "ui:placeholder": "Enter phone number"
         },
         "website": {
             "ui:disabled": false,
-            "ui:placeholder": "Enter URL",
-            "ui:widget": "uri"
+            "ui:placeholder": "Enter URL"
         },
         "rating": {
-            "ui:disabled": false,
-            "ui:widget": "range"
+            "ui:disabled": false
         },
         "userId": {
             "ui:disabled": false
@@ -515,7 +492,7 @@
             "ui:widget": "select"
         },
         "roles": {
-            "ui:widget": "select",
+            "ui:widget": "checkboxes",
             "ui:enumNames": [
                 "Admin",
                 "User"
@@ -523,8 +500,7 @@
             "ui:disabled": false
         },
         "country": {
-            "ui:disabled": false,
-            "ui:widget": "select"
+            "ui:disabled": false
         },
         "job-container": {
             "ui:field": "Container",
@@ -568,58 +544,147 @@
                 "enableIf": null,
                 "invalidIf": null,
                 "onChange": null,
-                "component": "Container"
+                "component": "container"
             }
         },
         "job-title": {
             "ui:disabled": false,
-            "ui:placeholder": "Job Title",
-            "ui:widget": "text"
+            "ui:placeholder": "Job Title"
         },
         "company-name": {
             "ui:disabled": false,
-            "ui:placeholder": "Company Name",
-            "ui:widget": "text"
+            "ui:placeholder": "Company Name"
         },
         "additional-info-tabs": {
-            "ui:field": "Tabs",
-            "tabs": [
+            "ui:field": "Container",
+            "ui:layout": [],
+            "options": {
+                "label": "Additional Info",
+                "type": "Tabs",
+                "collapsible": false,
+                "collapsed": false,
+                "direction": "row",
+                "condition": null,
+                "validIcon": null,
+                "invalidIcon": null,
+                "description": null,
+                "inProgressIcon": null,
+                "labelPosition": null,
+                "icon": null,
+                "iconPosition": null,
+                "required": false,
+                "width": null,
+                "readonly": false,
+                "rightLabel": null,
+                "helperLabel": null,
+                "helper": null,
+                "error": null,
+                "tooltip": null,
+                "hideIf": null,
+                "showIf": null,
+                "disableIf": null,
+                "enableIf": null,
+                "invalidIf": null,
+                "onChange": null,
+                "component": "tabs"
+            }
+        },
+        "Address Details": {
+            "ui:field": "Container",
+            "ui:layout": [
                 {
-                    "name": "Address Details",
-                    "fields": [
-                        "street"
-                    ]
-                },
-                {
-                    "name": "Location Details",
-                    "fields": [
-                        "city",
-                        "zip-code"
-                    ]
-                },
-                {
-                    "name": "Location Details",
-                    "fields": [
-                        "success-toast",
-                        "error-toast"
-                    ]
+                    "street": {
+                        "md": 12
+                    }
                 }
-            ]
+            ],
+            "options": {
+                "label": "Address Details",
+                "type": "Container",
+                "collapsible": false,
+                "collapsed": false,
+                "direction": "row",
+                "condition": null,
+                "validIcon": null,
+                "invalidIcon": null,
+                "description": null,
+                "inProgressIcon": null,
+                "labelPosition": null,
+                "icon": null,
+                "iconPosition": null,
+                "required": false,
+                "width": null,
+                "readonly": false,
+                "rightLabel": null,
+                "helperLabel": null,
+                "helper": null,
+                "error": null,
+                "tooltip": null,
+                "hideIf": null,
+                "showIf": null,
+                "disableIf": null,
+                "enableIf": null,
+                "invalidIf": null,
+                "onChange": null,
+                "component": null
+            }
         },
         "street": {
             "ui:disabled": false,
-            "ui:placeholder": "Street Name",
-            "ui:widget": "text"
+            "ui:placeholder": "Street Name"
+        },
+        "Location Details": {
+            "ui:field": "Container",
+            "ui:layout": [
+                {
+                    "success-toast": {
+                        "md": 12
+                    }
+                },
+                {
+                    "error-toast": {
+                        "md": 12
+                    }
+                }
+            ],
+            "options": {
+                "label": "Location Details",
+                "type": "Container",
+                "collapsible": false,
+                "collapsed": false,
+                "direction": "column",
+                "condition": null,
+                "validIcon": null,
+                "invalidIcon": null,
+                "description": null,
+                "inProgressIcon": null,
+                "labelPosition": null,
+                "icon": null,
+                "iconPosition": null,
+                "required": false,
+                "width": null,
+                "readonly": false,
+                "rightLabel": null,
+                "helperLabel": null,
+                "helper": null,
+                "error": null,
+                "tooltip": null,
+                "hideIf": null,
+                "showIf": null,
+                "disableIf": null,
+                "enableIf": null,
+                "invalidIf": null,
+                "onChange": null,
+                "component": null
+            }
         },
         "city": {
             "ui:disabled": false,
-            "ui:placeholder": "City",
-            "ui:widget": "text"
+            "ui:placeholder": "City"
         },
         "zip-code": {
             "ui:disabled": false,
-            "ui:placeholder": "Postal Code",
-            "ui:widget": "text"
+            "ui:placeholder": "Postal Code"
         },
         "success-toast": {
             "ui:disabled": false
