@@ -19,10 +19,13 @@ abstract class AbstractField extends AbstractCommonAttributes
         }
 
         if ($data && is_object($data)) {
-            $fieldName = $this->getName();
-            if (is_string($fieldName) && $fieldName !== '') {
-                $value = $this->getNestedValue($data, $fieldName);
-                $this->value = is_scalar($value) ? (string)$value : null;
+            $dataPath = $this->resolveDataPath();
+            if ($dataPath !== null) {
+                $value = $this->getNestedValue($data, $dataPath);
+                $normalized = $this->normalizeFieldValue($value);
+                if ($normalized !== null) {
+                    $this->value = $normalized;
+                }
             }
         }
 
@@ -73,6 +76,94 @@ abstract class AbstractField extends AbstractCommonAttributes
         }
 
         return array_filter($parentJson, fn($value) => ($value !== null) && ($value !== ''));
+    }
+
+    private function normalizeFieldValue(mixed $value): ?string
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        if ($value instanceof \DateTimeInterface) {
+            return $this->formatDateTimeValue($value);
+        }
+
+        if (is_scalar($value) || $value instanceof \Stringable) {
+            return (string)$value;
+        }
+
+        return null;
+    }
+
+    private function formatDateTimeValue(\DateTimeInterface $value): string
+    {
+        $type = method_exists($this, 'getType') ? $this->getType() : null;
+        $format = method_exists($this, 'getFormat') ? $this->getFormat() : null;
+
+        $phpFormat = $this->convertFormatToPhp($format, $type);
+
+        if (!$phpFormat) {
+            return match ($type) {
+                'time' => $value->format('H:i:s'),
+                'datetime' => $value->format('c'),
+                default => $value->format('Y-m-d'),
+            };
+        }
+
+        return $value->format($phpFormat);
+    }
+
+    private function convertFormatToPhp(?string $format, ?string $type): ?string
+    {
+        if (!$format) {
+            return null;
+        }
+
+        $map = [
+            'yyyy' => 'Y',
+            'yy' => 'y',
+            'dd' => 'd',
+            'HH' => 'H',
+            'hh' => 'h',
+            'ss' => 's',
+        ];
+
+        $translated = strtr($format, $map);
+        $translated = str_replace('MM', 'mm', $translated);
+
+        if (!str_contains($translated, 'mm')) {
+            return $translated;
+        }
+
+        $segments = explode('mm', $translated);
+        $result = array_shift($segments);
+
+        foreach ($segments as $index => $segment) {
+            $replacement = match ($type) {
+                'time' => 'i',
+                'datetime' => $index === 0 ? 'm' : 'i',
+                default => 'm',
+            };
+
+            $result .= $replacement . $segment;
+        }
+
+        return $result;
+    }
+
+    private function resolveDataPath(): ?string
+    {
+        $fieldName = $this->getName();
+        if (is_string($fieldName) && $fieldName !== '') {
+            return $fieldName;
+        }
+
+        $fieldId = $this->getId();
+        if (is_string($fieldId) && $fieldId !== '') {
+            return $fieldId;
+        }
+
+        return null;
     }
 
     private function getNestedValue(object $data, ?string $path): mixed
