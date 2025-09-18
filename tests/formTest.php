@@ -166,6 +166,38 @@ class FormTest extends TestCase
 
         file_put_contents(__DIR__ . '/data/RJSBuiltForm.json', $json);
     }
+
+    public function testDateFieldValueIsFormatted()
+    {
+        $form = new Form(__DIR__ . '/data/form.xml');
+        $engine = new UIEngine();
+
+        $json = $engine->buildForm($form, new FormTestInstance());
+        $decoded = json_decode($json, true);
+
+        $birthdayField = $this->findFieldById($decoded['layout'] ?? [], 'birthday');
+
+        $this->assertNotNull($birthdayField, 'The birthday field should exist in the generated layout.');
+        $this->assertSame('1990-01-01', $birthdayField['value'] ?? null);
+    }
+
+    private function findFieldById(array $elements, string $id): ?array
+    {
+        foreach ($elements as $element) {
+            if (($element['id'] ?? null) === $id || ($element['name'] ?? null) === $id) {
+                return $element;
+            }
+
+            if (isset($element['elements']) && is_array($element['elements'])) {
+                $found = $this->findFieldById($element['elements'], $id);
+                if ($found !== null) {
+                    return $found;
+                }
+            }
+        }
+
+        return null;
+    }
 }
 
 
