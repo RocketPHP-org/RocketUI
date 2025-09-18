@@ -23,7 +23,7 @@
                    required="true"
                    placeholder="Enter your email"
             />
-            <input id="birthdate" type="date" label="Birth Date" format="yyyy-mm-dd"/>
+            <input id="birthday" type="date" label="Birth Date" format="yyyy-mm-dd"/>
             <input id="birthdate" type="empty" label="Birth Date" format="yyyy-mm-dd"/>
             <triggerUseCase name="Check" method="check_insi()">
                 <param name="param1" value="value1"/>

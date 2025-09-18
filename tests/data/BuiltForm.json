@@ -85,7 +85,7 @@
                     "type": "email"
                 },
                 {
-                    "id": "birthdate",
+                    "id": "birthday",
                     "label": "Birth Date",
                     "required": false,
                     "readonly": false,

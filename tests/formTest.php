@@ -7,6 +7,11 @@ use RocketPhp\RocketUI\UIEngine;
 use RocketPhp\RocketUI\Views\Form\Form;
 use stdClass;
 
+
+class valueObject {
+    public $value = 'ValueObjectValue Net';
+}
+
 class address {
     public $id = 100;
     public $street = "123 Main St";
@@ -22,11 +27,12 @@ class FormTestInstance {
     public $id = 1;
     public $name = "John Doe";
     public $email = "john@doe.com";
-
     public $address;
+    public \DateTimeImmutable $birthday;
 
     public function __construct() {
         $this->address = new address();
+        $this->birthday = new \DateTimeImmutable('1990-01-01');
     }
 
     public function getName() {
@@ -56,8 +62,11 @@ class EmptyFormTestInstance {
 
     public $address;
 
+    public \DateTimeImmutable $birthday;
+
     public function __construct() {
         $this->address = new address();
+        $this->birthday = new \DateTimeImmutable('1990-01-01');
     }
 
     public function getName() {
@@ -71,6 +80,11 @@ class EmptyFormTestInstance {
     public function isValid(): bool
     {
         return true;
+    }
+
+    public function getBirthday(): ?\DateTimeImmutable
+    {
+        return $this->birthday;
     }
 
 }
