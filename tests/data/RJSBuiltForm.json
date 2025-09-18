@@ -707,5 +707,10 @@
             }
         ]
     },
-    "formData": []
+    "formData": {
+        "gender": "male",
+        "favorite-color": "#FFFFFF",
+        "userId": "123456",
+        "user-status": "active"
+    }
 }

@@ -90,6 +90,80 @@ class EmptyFormTestInstance {
 }
 
 
+class AddressWithGetters
+{
+    public function __construct(
+        private int $id = 100,
+        private string $street = '456 Side St'
+    ) {
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function getStreet(): string
+    {
+        return $this->street;
+    }
+}
+
+
+class GetterOnlyFormTestInstance
+{
+    public static array $FLOW = [
+        "allowed_values" => ["Status" => ["pending", "shipped", "delivered", "cancelled"]],
+        "transitions" => [
+            "status" => [
+                "pending" => ["shipped", "cancelled"],
+                "shipped" => ["delivered"],
+                "delivered" => [],
+            ],
+        ],
+    ];
+
+    private string $name = 'Getter Only';
+
+    private string $email = 'getter@example.com';
+
+    private AddressWithGetters $address;
+
+    private \DateTimeImmutable $birthday;
+
+    public function __construct()
+    {
+        $this->address = new AddressWithGetters();
+        $this->birthday = new \DateTimeImmutable('1990-01-01');
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getAddress(): AddressWithGetters
+    {
+        return $this->address;
+    }
+
+    public function getBirthday(): \DateTimeImmutable
+    {
+        return $this->birthday;
+    }
+
+    public function isValid(): bool
+    {
+        return true;
+    }
+}
+
+
 class FormTest extends TestCase
 {
     public function testFormXSDValidation()
@@ -179,6 +253,27 @@ class FormTest extends TestCase
 
         $this->assertNotNull($birthdayField, 'The birthday field should exist in the generated layout.');
         $this->assertSame('1990-01-01', $birthdayField['value'] ?? null);
+    }
+
+    public function testValuesAreResolvedFromGetterMethods()
+    {
+        $form = new Form(__DIR__ . '/data/form.xml');
+        $engine = new UIEngine();
+
+        $json = $engine->buildForm($form, new GetterOnlyFormTestInstance());
+        $decoded = json_decode($json, true);
+
+        $nameField = $this->findFieldById($decoded['layout'] ?? [], 'name');
+        $this->assertSame('Getter Only', $nameField['value'] ?? null, 'The name field should use the getter value.');
+
+        $birthdayField = $this->findFieldById($decoded['layout'] ?? [], 'birthday');
+        $this->assertSame('1990-01-01', $birthdayField['value'] ?? null, 'The birthday field should format the getter value.');
+
+        $thumbField = $this->findFieldById($decoded['layout'] ?? [], 'thumb');
+        $this->assertSame('100', $thumbField['value'] ?? null, 'Nested getter values should hydrate nested fields.');
+
+        $streetField = $this->findFieldById($decoded['layout'] ?? [], 'address.street');
+        $this->assertSame('456 Side St', $streetField['value'] ?? null, 'Nested getter values should hydrate dot notation fields.');
     }
 
     private function findFieldById(array $elements, string $id): ?array

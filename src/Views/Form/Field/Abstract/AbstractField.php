@@ -19,10 +19,13 @@ abstract class AbstractField extends AbstractCommonAttributes
         }
 
         if ($data && is_object($data)) {
-            $fieldName = $this->getName();
-            if (is_string($fieldName) && $fieldName !== '') {
-                $value = $this->getNestedValue($data, $fieldName);
-                $this->value = $this->normalizeFieldValue($value);
+            $dataPath = $this->resolveDataPath();
+            if ($dataPath !== null) {
+                $value = $this->getNestedValue($data, $dataPath);
+                $normalized = $this->normalizeFieldValue($value);
+                if ($normalized !== null) {
+                    $this->value = $normalized;
+                }
             }
         }
 
@@ -146,6 +149,21 @@ abstract class AbstractField extends AbstractCommonAttributes
         }
 
         return $result;
+    }
+
+    private function resolveDataPath(): ?string
+    {
+        $fieldName = $this->getName();
+        if (is_string($fieldName) && $fieldName !== '') {
+            return $fieldName;
+        }
+
+        $fieldId = $this->getId();
+        if (is_string($fieldId) && $fieldId !== '') {
+            return $fieldId;
+        }
+
+        return null;
     }
 
     private function getNestedValue(object $data, ?string $path): mixed
