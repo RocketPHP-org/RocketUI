@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectResources">
-    <resource url="http://rocket.com/rf-schema" location="$PROJECT_DIR$/src/views/form/XSD/schema.xsd" />
-    <resource url="http://rocket.com/rg-schema" location="$PROJECT_DIR$/src/Views/Grid/XSD/schema.xsd" />
-  </component>
-</project>
