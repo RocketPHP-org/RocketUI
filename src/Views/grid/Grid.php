@@ -6,6 +6,7 @@ use RocketPhp\RocketUI\Views\Grid\Action\Button;
 use RocketPhp\RocketUI\Views\Form\Layout\Layout;
 use RocketPhp\RocketUI\Views\Grid\Column\Column;
 use RocketPhp\RocketUI\Views\Grid\Toggle\Toggle;
+use RocketPhp\RocketUI\Views\Service\PlaceholderReplacer;
 
 class Grid
 {
@@ -16,6 +17,7 @@ class Grid
     private array $actions;
     private array $gridOptions;
     private array $rowActions;
+    private ?string $title;
 
     /**
      * @throws \Exception
@@ -25,6 +27,7 @@ class Grid
         $xml = new \DOMDocument();
         $xml->load($xmlPath);
 
+        $this->title = $xml->documentElement->getAttribute('title') ?: null;
         $this->metadata = $this->parseMetadata($xml);
         $this->toggles = $this->parseToggles($xml);
         $this->columns = $this->parseColumns($xml);
@@ -166,6 +169,11 @@ class Grid
         return $this->columns;
     }
 
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
     public function buildGrid(mixed $data): string
     {
         $toggle = array_map(fn($toggle) => $toggle->getJson(), $this->toggles);
@@ -174,14 +182,19 @@ class Grid
         $rowActions = array_map(fn($btn) => $btn->getJson($data), $this->rowActions ?? []);
         $gridOptions = $this->gridOptions ?? [];
 
-        return json_encode([
+        $responseArray = [
+            'title' => $this->getTitle(),
             'metadata' => $this->getMetadata(),
             'toggles' => $toggle,
             'columns' => $columns,
             'actions' => $actions,
             'rowActions' => $rowActions,
             'gridOptions' => $gridOptions,
-        ]);
+        ];
+
+        $responseArray = PlaceholderReplacer::replaceInArray($responseArray, $data);
+
+        return json_encode($responseArray);
     }
 
 }

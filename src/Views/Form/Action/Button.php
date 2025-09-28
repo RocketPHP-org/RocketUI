@@ -8,11 +8,13 @@ class Button extends AbstractAction
 {
     private ?string $type;
     private ?string $confirm;
+    private ?string $redirection;
     public function __construct(\DOMElement $node)
     {
         parent::__construct($node);
-        $this->type = $node->getAttribute('type');
-        $this->confirm = $node->getAttribute('confirm');
+        $this->type = $node->getAttribute('type') ?: null;
+        $this->confirm = $node->getAttribute('confirm') ?: null;
+        $this->redirection = $node->getAttribute('redirection') ?: null;
     }
 
     public function getType() : ?string
@@ -24,11 +26,17 @@ class Button extends AbstractAction
         return $this->confirm;
     }
 
+    public function getRedirection() : ?string
+    {
+        return $this->redirection;
+    }
+
     public function omitJson(mixed $data): ?array
     {
         return [
             'type' => $this->getType(),
-            'confirm' => $this->getConfirm()
+            'confirm' => $this->getConfirm(),
+            'redirection' => $this->getRedirection()
         ];
     }
 }

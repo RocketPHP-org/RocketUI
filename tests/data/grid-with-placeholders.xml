@@ -1,0 +1,28 @@
+<RocketGrid xmlns="http://rocket.com/rg-schema"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://rocket.com/rg-schema ../../src/Views/Grid/XSD/schema.xsd"
+            title="Users for @@Rocket/company.name">
+
+    <metadata>
+        <title>Grid for @@Rocket/company.name</title>
+        <description>User management grid for company ID @@Rocket/company.id</description>
+        <version>1.0</version>
+    </metadata>
+
+    <columns>
+        <column name="id" label="ID" type="text" sortable="true"/>
+        <column name="name" label="Name" type="text" sortable="true"/>
+        <column name="email" label="Email" type="text" sortable="true"/>
+    </columns>
+
+    <actions>
+        <button type="primary" label="Add User" redirection="users/create/@@Rocket/company.id"/>
+        <button type="secondary" label="Export" redirection="users/export/@@Rocket/company.id"/>
+    </actions>
+
+    <rowActions>
+        <button type="primary" label="Edit" redirection="users/@@Rocket/id/edit"/>
+        <button type="danger" label="Delete" redirection="users/@@Rocket/id/delete" confirm="Delete user @@Rocket/name?"/>
+    </rowActions>
+
+</RocketGrid>

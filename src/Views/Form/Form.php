@@ -3,12 +3,14 @@ namespace RocketPhp\RocketUI\Views\Form;
 
 use RocketPhp\RocketUI\Views\Form\Action\Button;
 use RocketPhp\RocketUI\Views\Form\Layout\Layout;
+use RocketPhp\RocketUI\Views\Service\PlaceholderReplacer;
 
 class Form
 {
     private array $metadata;
     private Layout $layout;
     private array $actions;
+    private ?string $title;
 
     /**
      * @throws \Exception
@@ -18,6 +20,7 @@ class Form
         $xml = new \DOMDocument();
         $xml->load($xmlPath);
 
+        $this->title = $xml->documentElement->getAttribute('title') ?: null;
         $this->layout = $this->parseLayout($xml);
         $this->metadata = $this->parseMetadata($xml);
         $this->actions = $this->parseActions($xml);
@@ -34,6 +37,7 @@ class Form
             'title' => $metadataNode->getElementsByTagName("title")->item(0)?->nodeValue ?? '',
             'description' => $metadataNode->getElementsByTagName("description")->item(0)?->nodeValue ?? '',
             'version' => $metadataNode->getElementsByTagName("version")->item(0)?->nodeValue ?? '',
+            'api' => $metadataNode->getElementsByTagName("api")->item(0)?->nodeValue ?? '',
             'layout_type' => $this->getLayout()->getType(),
         ];
     }
@@ -87,6 +91,11 @@ class Form
         return $this->layout;
     }
 
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
     public function buildForm(mixed $data)
     {
         $layout = $this->getLayout()->getJson($data);
@@ -95,12 +104,15 @@ class Form
             $actions[] = $action->getJson($data);
         }
 
-        $jsonResponse = json_encode([
+        $responseArray = [
+            'title' => $this->getTitle(),
             'metadata' => $this->getMetadata(),
             'layout' => $layout,
             'actions' => $actions
-        ]);
+        ];
 
-        return $jsonResponse;
+        $responseArray = PlaceholderReplacer::replaceInArray($responseArray, $data);
+
+        return json_encode($responseArray);
     }
 }

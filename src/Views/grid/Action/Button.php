@@ -11,6 +11,7 @@ class Button
     private ?string $condition;
     private ?string $confirm;
     private string $type;
+    private ?string $redirection;
     private array $params = [];
 
     public function __construct(\DOMElement $node)
@@ -21,6 +22,7 @@ class Button
         $this->tooltip = $node->getAttribute('tooltip') ?: null;
         $this->condition = $node->getAttribute('condition') ?: null;
         $this->confirm = $node->getAttribute('confirm') ?: null;
+        $this->redirection = $node->getAttribute('redirection') ?: null;
         $this->type = $node->getAttribute('type');
 
         foreach ($node->getElementsByTagName('param') as $paramNode) {
@@ -37,7 +39,7 @@ class Button
         }
     }
 
-    public function getJson(): array
+    public function getJson(mixed $data = null): array
     {
         return array_filter([
             'id' => $this->id,
@@ -46,6 +48,7 @@ class Button
             'tooltip' => $this->tooltip,
             'condition' => $this->condition,
             'confirm' => $this->confirm,
+            'redirection' => $this->redirection,
             'type' => $this->type,
             'params' => $this->params ?: null,
         ], fn($value) => $value !== null);

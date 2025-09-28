@@ -1,0 +1,24 @@
+<RocketForm xmlns="http://rocket.com/rf-schema"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://rocket.com/rf-schema ../../src/Views/Form/XSD/schema.xsd"
+            title="Edit User @@Rocket/name">
+
+    <metadata>
+        <title>Form for @@Rocket/name</title>
+        <description>Edit user details for ID @@Rocket/id</description>
+        <version>1.0</version>
+    </metadata>
+
+    <layout type="modal">
+        <container id="main-container" label="Personal Information" type="card" direction="row">
+            <input name="name" type="text" label="Name" required="true" placeholder="Enter your name" default="@@Rocket/name"/>
+            <input name="email" type="email" label="Email" required="true" placeholder="Enter your email" default="@@Rocket/email"/>
+        </container>
+    </layout>
+
+    <actions>
+        <button name="submit" type="primary" label="Save" redirection="users/@@Rocket/id/view" confirm="Save changes for @@Rocket/name?"/>
+        <button type="secondary" label="Cancel" redirection="users/list"/>
+    </actions>
+
+</RocketForm>
